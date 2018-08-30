@@ -1,0 +1,40 @@
+.solution_offered{
+    background-color: #E9E9E9
+}
+.blocked {
+    background-color: #ffe5e5
+}
+
+.needinfo {
+    background-color: #fff6e5
+}
+
+.review_requested{
+	background-color: #e7f5fe
+}
+
+.complexTbl{
+	width:100%;
+	/*border-spacing:10px;*/
+}
+
+.complexTbl > tbody > tr > td, .complexTbl > tbody > tr > th, .complexTbl > tfoot > tr > td, .complexTbl > tfoot > tr > th, .complexTbl > thead > tr > td, .complexTbl > thead > tr > th {
+    padding: 3px 2px;
+}
+
+.complexTbl > thead > tr > th {
+    background-color: #EDEDED;
+	font-weight: bold;
+	font-size: 105%;
+}
+
+.OK{
+    background-color: #eafaea
+}
+.NG {
+    background-color: #ffe5e5
+}
+
+.Open{
+	background-color: #e7f5fe
+}
