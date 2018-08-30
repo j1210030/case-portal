@@ -1,0 +1,181 @@
+{% extends 'gcase/common/base.html' %}
+{% load staticfiles %}
+{% block js %}
+<script src="{% static 'js/ajax/component.js' %}"></script>
+{% endblock %}
+{% block content %}
+
+
+<div class="">
+            <div class="page-title">
+              <div class="title_left">
+                <h3><i class="fa fa-tags"></i> Components</h3>
+              </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  
+                  <div class="x_content">
+                  	{% include 'gcase/common/show_message.html' %}
+                   
+                    <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                      <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                      {% for product in product_list %}
+                        <li role="presentation" {% if product.id == selectedProductId|add:"0" %} class="active" {% endif %}>
+                        	<a href="/components/?pid={{ product.id}}" id="product_{{product.id}}" {% if product.id == selectedProductId %} aria-expanded="true" {% else %} aria-expanded="true"{% endif  %}>
+                        	
+                        		{% if product.logo_file %}
+                        
+                         			<img src="{{ MEDIA_URL }}{{ product.logo_file }}" class="img-rounded" alt="Logo" width="20" height="20"> 
+                        		{% endif %}
+                        		<strong>{{ product.name }}</strong>
+                        
+                       	 	</a>
+                        </li>
+                        
+                      {% endfor %}
+                      </ul>
+                      <div id="myTabContent" class="tab-content">
+                      
+                        <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+                           
+                           <div class="row">
+              				<div class="col-md-8 col-sm-8 col-xs-12">
+               					<div class="x_panel">
+                  					<div class="x_title">
+                    					<h4>{{ product.name }} components
+                    					
+                    					 {% if component_list %}
+                    					  &nbsp;<span class="badge"><span class="text-danger">{{ component_list | length }}</span></span>
+                    					 {% endif %}
+                    					</h4>
+                    					<div class="clearfix"></div>
+                  					</div>
+                  					<div class="x_content">
+                  					<div class="pull-left">
+                  					
+                    				<button class="btn btn-round btn-primary btn-xs" data-toggle="modal" onClick="addEditComponent('{{ product.id }}','{{ product.name }}','','1','');" ><i class="fa fa-plus"></i> Add new</button>
+              						</div>
+                            {% if component_list %}
+                            
+                      		<table  class="table table-striped table-bordered jambo_table">
+                      			<thead>
+                       			 	<tr class="headings">
+                          				<th class="column-title">Name</th>
+                          				<th class="column-title">Status</th>
+                          				<th class="column-title">Action</th>
+                        			</tr>
+                      			</thead>
+                     			 <tbody>
+                     			 	 {% for component in component_list %}
+                        			<tr>
+                     			 	<td>
+                        				<strong>{{ component.name }}</strong>
+                        			</td>
+                        			<td style="text-align:center">
+                        			{% if component.active %}
+                        			<i class="fa fa-square green"></i>
+                        			{% else %}
+                        				<i class="fa fa-square default"></i>
+                        			{% endif %}
+                        			</td >
+                        			
+                        			<td style="vertical-align:middle">
+                        			<button class="btn btn-round btn-info btn-xs" onClick="addEditComponent('{{ product.id }}','{{ product.name }}','{{ component.name }}','{{ component.active }}','{{ component.id }}');" > <i class="fa fa-edit"></i> Edit</button>
+                        			<a href="/cases/component_wise?cid={{ component.id }}&pid={{ product.id }}" role="button" class="btn btn-round btn-primary btn-xs"><i class="fa fa-database"></i> Reported cases</a>
+                        			</td>
+                                                           
+                       				 </tr>
+                       			{% endfor %}  
+                        			
+								</tbody>
+							</table>
+							
+						 {% endif %}                           
+                           </div>
+                           </div>
+                           </div>
+                           </div>
+                          
+                        </div>
+                        
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+		<div class="modal fade" tabindex="-1" id="componentAddEditModal"  role="dialog" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+                          </button>
+                          <h4 class="modal-title" id="myModalLabel2">Add/Edit Components</h4>
+                        </div>
+                        <form id="formComponent" class="form-horizontal form-label-left" method="POST" action="">
+                        <div class="modal-body">
+                        
+                        <div class="row">
+              				<div class="col-md-12 col-sm-12 col-xs-12">
+                          	{% if product.logo_file %}
+                         	<img src="{{ MEDIA_URL }}{{ product.logo_file }}" class="img-rounded" alt="Logo" width="20" height="20"> 
+                        	{% endif %}
+                        	<span id="productName" style="font-size:150%;font-weight:normal;vertical-align:middle"></span>
+                           
+						 	{% csrf_token %}
+							<input type="hidden" name="pid" id="pid" value="{{ product.id }}" readonly />
+							<input type="hidden" name="id"  id="cid" value="" />
+						
+							<div class="item form-group">
+                        		<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name_english">Name <span class="required">*</span>
+                        		</label>
+                        		<div class="col-md-6 col-sm-6">
+                        			<input type="text" name="name" id="cname" size="50" value="" data-validate-length-range="50" data-validate-words="2" required="required" />
+                        			<div class="text-danger" id="unqNameMsg" style="display:none;">Name already exists.</div>
+                        		</div>
+                      		</div>
+                      
+                       
+                     		 <div class="form-group">
+                        		<label class="control-label col-md-3 col-sm-3 col-xs-12" for="company_url">Status  <span class="required">*</span>
+                       			 </label>
+                        		<div class="col-md-5 col-sm-5 col-xs-12">
+                        	
+                        		<div class="radio">
+                            		<label>
+                              			<input type="radio" name="active" value="True" class="flat" id="id_active_0"  checked="checked"  /> Active
+                            		</label>
+                          		
+                            		<label>
+                            		  <input type="radio" name="active" value="False" class="flat" id="id_active_1" /> In active
+                           			 </label>
+                         		 </div>
+                        		</div>
+                     		 </div>
+                      
+                     		
+                     	</div>
+                     	</div>
+                     		
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default btn-xs" data-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary btn-xs" id="saveBtn" onclick="checkName();"><i class="fa fa-edit"></i> Save</button>
+                        </div>
+                        
+                        </form>
+
+                      </div>
+                    </div>
+                  </div>
+                  <!-- /modals -->
+
+{% endblock %}

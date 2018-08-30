@@ -1,0 +1,703 @@
+{% extends 'gcase/common/base.html' %} {% load staticfiles %} {% block js %}
+
+<script src="{% static 'js/ajax/da_report_chart.js' %}"></script>
+{% endblock %} {% block content %}
+
+<div class="">
+    <div class="page-title">
+        <div class="title_left">
+            <h3><i class="fa fa-cubes"></i> Yearly report &nbsp; [ {{ year }} ]</h3>
+
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2><small>Select Year</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+
+                    <form class="form-horizontal form-label-left input_mask">
+
+                        <div class="col-md-2 col-sm-2 col-xs-12 form-group has-feedback">
+                            <label>
+                      			Year
+                      			</label>
+                            <select name="from_year" id="from_year" class="form-control">
+                          			<option value="">Year</option>
+                          			{% for year in from_year_options %}
+                          			<option value="{{ year }}" {% if year == from_year %} selected {% endif %}>{{ year }}</option>
+                          			{% endfor %}
+                          		</select>
+                        </div>
+
+
+                        <div class="form-group pull-right">
+                            <div class="col-md-12 col-sm-9">
+
+                                <button type="submit" class="btn btn-sm btn-rounded btn-primary"> <i class="fa fa-search"></i>&nbsp;Submit</button>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="clearfix"></div>
+
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+
+
+                <div class="x_title">
+                    <h2><small>Incoming/SO</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="x_content">
+                    {% include 'gcase/common/show_message.html' %}
+
+
+                    <div class="table-responsive">
+
+
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th style="text-align:left;border-bottom: 2px solid #0000cc;width:50%;background-color:#87CEFF">
+                                        <span style="font-size:110%">Incoming(Summary)</span>
+                                    </th>
+                                    <th style="text-align:left;border-bottom: 2px solid #0000cc;background-color:#87CEFF">
+                                        <span style="font-size:110%">SO(Summary)</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+
+                                        <table border="1" class="complexTbl">
+                                            <thead>
+                                                <tr class="headings">
+                                                    <th>Case type</th>
+                                                    <th>Firebase</th>
+                                                    <th>Android</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        Partner
+                                                    </td>
+                                                    {% for item in incoming_partner %} {% if item.0 == 2 %}
+                                                    <td>{{ item.1 }}</td>
+                                                    {% endif %} {% endfor %} {% for item in incoming_partner %} {% if item.0 == 1 %}
+                                                    <td>{{ item.1 }}</td>
+                                                    {% endif %} {% endfor %}
+
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        Non partner
+                                                    </td>
+                                                    {% for item in incoming_nonpartner %} {% if item.0 == 2 %}
+                                                    <td>{{ item.1 }}</td>
+                                                    {% endif %} {% endfor %} {% for item in incoming_nonpartner %} {% if item.0 == 1 %}
+                                                    <td>{{ item.1 }}</td>
+                                                    {% endif %} {% endfor %}
+
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        Total
+                                                    </td>
+                                                    <td>{{ total_incoming.firebase }} / ( 22% Partner cases )</td>
+                                                    <td>{{ total_incoming.android }} / ( 74.5% Partner cases )</td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </td>
+
+                                    <td>
+
+                                        <table border="1" class="complexTbl">
+                                            <thead>
+                                                <tr class="headings">
+                                                    <th>Case type</th>
+                                                    <th>Firebase</th>
+                                                    <th>Android</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        Partner
+                                                    </td>
+                                                    {% for item in so_partner %} {% if item.0 == 2 %}
+                                                    <td>{{ item.1 }}</td>
+                                                    {% endif %} {% endfor %} {% for item in so_partner %} {% if item.0 == 1 %}
+                                                    <td>{{ item.1 }}</td>
+                                                    {% endif %} {% endfor %}
+
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        Non partner
+                                                    </td>
+                                                    {% for item in so_nonpartner %} {% if item.0 == 2 %}
+                                                    <td>{{ item.1 }}</td>
+                                                    {% endif %} {% endfor %} {% for item in so_nonpartner %} {% if item.0 == 1 %}
+                                                    <td>{{ item.1 }}</td>
+                                                    {% endif %} {% endfor %}
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        Total
+                                                    </td>
+                                                    <td>{{ total_incoming.firebase_so }}</td>
+                                                    <td>{{ total_incoming.android_so }}</td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+
+                                    <td>
+                                        <div id="echart_monthly_incoming" style="height:350px;"></div>
+                                    </td>
+                                    <td>
+                                        <div id="echart_monthly_so" style="height:350px;"></div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    {% include "gcase/yearly_report/language.html" %}
+
+
+    <!--  Component -->
+    <div class="clearfix"></div>
+
+    <div class="row">
+
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+
+                <div class="x_title">
+                    <h2><small>Inflow   ( Firebase component )</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+
+
+                <div class="x_content">
+                    {% include "gcase/report/da_report/component.html" %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--  Quality -->
+    <div class="clearfix"></div>
+
+    <div class="row">
+
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+
+                <div class="x_title">
+                    <h2><small>Quality   ( Android / Firebase )</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+
+
+                <div class="x_content">
+                    {% include "gcase/yearly_report/quality.html" %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!--  Top Partners -->
+    <div class="clearfix"></div>
+
+    <div class="row">
+
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+
+                <div class="x_title">
+                    <h2><small>Top Partners</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+
+
+                <div class="x_content">
+
+                    <div class="table-responsive">
+
+                        <table class="table table-bordered">
+
+                            <tr>
+                                <th style="text-align:left;border-bottom: 2px solid #0000cc;width:50%;background-color:#87CEFF">
+                                    <span style="font-size:110%"> <img src="/upload/products/2017/08/android.png" class="img-rounded" alt="Logo" width="25" height="25">&nbsp;Android</span>
+                                </th>
+                            </tr>
+
+                            <tr>
+                                <td>
+
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th> <img src="/static/images/flags/jp.png" class="img-rounded" alt="Logo" width="20" height="20">&nbsp;Japan</th>
+                                                <th> <img src="/static/images/flags/ko.png" class="img-rounded" alt="Logo" width="20" height="20">&nbsp;Korea</th>
+                                                <th> <img src="/static/images/flags/zh.png" class="img-rounded" alt="Logo" width="20" height="20">&nbsp;China</th>
+
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+
+                                            <tr>
+
+                                                <td>
+
+                                                    {% include "gcase/report/partner/total/locale.html" with lang='jp' partner_case_list=android_top_partners %}
+
+                                                </td>
+
+                                                <td>
+                                                    {% include "gcase/report/partner/total/locale.html" with lang='ko' partner_case_list=android_top_partners %}
+                                                </td>
+
+                                                <td>
+                                                    {% include "gcase/report/partner/total/locale.html" with lang='zh' partner_case_list=android_top_partners %}
+                                                </td>
+
+
+
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <th style="text-align:left;border-bottom: 2px solid #0000cc;background-color:#87CEFF">
+                                    <span style="font-size:110%"><img src="/upload/products/2017/08/firebase.png" class="img-rounded" alt="Logo" width="25" height="25">&nbsp;Firebase</span>
+                                </th>
+                            </tr>
+
+
+                            <tr>
+
+                                <td>
+
+
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th> <img src="/static/images/flags/jp.png" class="img-rounded" alt="Logo" width="20" height="20">&nbsp;Japan</th>
+                                                <th> <img src="/static/images/flags/ko.png" class="img-rounded" alt="Logo" width="20" height="20">&nbsp;Korea</th>
+                                                <th> <img src="/static/images/flags/zh.png" class="img-rounded" alt="Logo" width="20" height="20">&nbsp;China</th>
+
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+
+                                            <tr>
+
+                                                <td>
+
+                                                    {% include "gcase/report/partner/total/locale.html" with lang='jp' partner_case_list=firebase_top_partners %}
+
+                                                </td>
+
+                                                <td>
+                                                    {% include "gcase/report/partner/total/locale.html" with lang='ko' partner_case_list=firebase_top_partners %}
+                                                </td>
+
+                                                <td>
+                                                    {% include "gcase/report/partner/total/locale.html" with lang='zh' partner_case_list=firebase_top_partners %}
+                                                </td>
+
+
+
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+</div>
+
+
+<script>
+    $(document).ready(function() {
+
+        var monthArr = ['Jan', 'Feb', 'Mar', 'App', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
+
+        var incomingAndroidJP = [];
+        var incomingAndroidKO = [];
+        var incomingAndroidZH = [];
+
+        var incomingFirebaseJP = [];
+        var incomingFirebaseKO = [];
+        var incomingFirebaseZH = [];
+
+        {% for item in monthly_incoming_android %}
+
+	        {% if item.language == 'jp' %} 
+	       		{% for data in item.incoming_list %}
+	       			incomingAndroidJP.push('{{ data.1 }}'); 
+	       		{% endfor %} 
+	        {% endif %}
+
+        {% if item.language == 'ko' %} 
+        {% for data in item.incoming_list %}
+        incomingAndroidKO.push('{{ data.1 }}'); 
+        {% endfor %} 
+        {% endif %}
+
+        {% if item.language == 'zh' %} 
+        {% for data in item.incoming_list %}
+        incomingAndroidZH.push('{{ data.1 }}'); 
+        {% endfor %}
+        {% endif %}
+
+        {% endfor %}
+
+        {% for item in monthly_incoming_firebase %}
+
+        {% if item.language == 'jp' %} 
+        {% for data in item.incoming_list %}
+        incomingFirebaseJP.push('{{ data.1 }}'); 
+        {% endfor %} 
+        {% endif %}
+
+        {% if item.language == 'ko' %} 
+        {% for data in item.incoming_list %}
+        incomingFirebaseKO.push('{{ data.1 }}'); 
+        {% endfor %} 
+        {% endif %}
+
+        {% if item.language == 'zh' %} 
+        {% for data in item.incoming_list %}
+        incomingFirebaseZH.push('{{ data.1 }}'); 
+        {% endfor %} 
+        {% endif %}
+
+        {% endfor %}
+
+
+        //------------------ Component-------------------------
+
+        var componentArr = [];
+        var compNameArr = []; 
+        
+        {% for item in component_report %}
+        var obj = {};
+        obj["name"] = '{{ item.1}}';
+        obj["value"] = '{{ item.0 }}';
+
+        componentArr.push(obj); 
+        {% endfor %}
+        compElm = document.getElementById('component_firebase_chart');
+        component_chart(compElm, componentArr, compNameArr);
+        
+        var componentPartnerArr = [];
+        var compNamePartnerArr = [];
+        
+        {% for item in component_report_partner %}
+        var obj = {};
+        obj["name"] = '{{ item.1}}';
+        obj["value"] = '{{ item.0 }}';
+
+        componentPartnerArr.push(obj); 
+        {% endfor %}
+        compElm = document.getElementById('component_firebase_chart_partners');
+        component_chart(compElm, componentPartnerArr, compNameArr);
+        
+        //---------------------Quality --------------------------
+        var qualityAndroidAvg = [];
+        var qualityAndroidAvgMonthly = [];
+
+        var qualityFirebaseAvg = [];
+        var qualityFirebaseAvgMonthly = [];
+
+
+        {% for item in android_quality.monthly_list %}
+        qualityAndroidAvg.push('{{ item.1 | floatformat:1}}');
+        qualityAndroidAvgMonthly.push('{{ item.2 | floatformat:1 }}') 
+        {% endfor %} 
+        {% for item in firebase_quality.monthly_list %}
+        qualityFirebaseAvg.push('{{ item.1 | floatformat:1 }}');
+        qualityFirebaseAvgMonthly.push('{{ item.2 | floatformat:1 }}') 
+        {% endfor %}
+
+        quality_chart('echart_monthly_quality_android', qualityAndroidAvg, qualityAndroidAvgMonthly, monthArr, '1');
+        quality_chart('echart_monthly_quality_firebase', qualityFirebaseAvg, qualityFirebaseAvgMonthly, monthArr, '2');
+
+        //------------------------------------------------------------
+        langElm = document.getElementById('echart_android_inflow');
+        language_chart(langElm, monthArr, incomingAndroidJP, incomingAndroidKO, incomingAndroidZH);
+
+        langElm = document.getElementById('echart_firebase_inflow');
+        language_chart(langElm, monthArr, incomingFirebaseJP, incomingFirebaseKO, incomingFirebaseZH);
+
+        var firebaseArr = [];
+        var androidArr = [];
+
+        var firebaseSOArr = [];
+        var androidSOArr = [];
+        var theme = {
+            color: [
+                '#9ACD32', '#ffc04c', '#34495E',
+            ]
+        }
+        var incomingChart = echarts.init(document.getElementById('echart_monthly_incoming'), theme);
+        var soChart = echarts.init(document.getElementById('echart_monthly_so'), theme);
+
+        {% for item in android_monthly %}
+        androidArr.push('{{ item.1 }}'); 
+        {% endfor %}
+
+        {% for item in firebase_monthly %}
+        firebaseArr.push('{{ item.1 }}'); 
+        {% endfor %}
+
+        {% for item in android_monthly_so %}
+        androidSOArr.push('{{ item.1 }}'); 
+        {% endfor %}
+
+        {% for item in firebase_monthly_so %}
+        firebaseSOArr.push('{{ item.1 }}'); 
+        {% endfor %}
+
+
+        console.log(androidSOArr);
+        console.log(firebaseSOArr);
+
+
+        var optionIncoming = {
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross',
+                    crossStyle: {
+                        color: '#999'
+                    }
+                }
+            },
+            toolbox: {
+                feature: {
+                    dataView: {
+                        show: false,
+                        readOnly: false,
+                        title: "Data View"
+                    },
+                    magicType: {
+                        show: true,
+                        type: ['line', 'bar'],
+                        title: 'Magic Type'
+                    },
+                    restore: {
+                        show: true,
+                        title: "Restore"
+                    },
+                    saveAsImage: {
+                        show: true,
+                        title: "Save Image"
+                    }
+                }
+            },
+            legend: {
+                data: ['Android', 'Firebase']
+            },
+            xAxis: [{
+                type: 'category',
+                data: monthArr,
+                axisPointer: {
+                    type: 'shadow'
+                }
+            }],
+            yAxis: [{
+                type: 'value',
+                name: 'Incoming',
+                min: 0,
+                //max: 5,
+                interval: 10,
+                axisLabel: {
+                    formatter: '{value}'
+                }
+            }],
+            series: [{
+                name: 'Android',
+                type: 'line',
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'top'
+                    }
+                },
+                data: androidArr
+            }, {
+                name: 'Firebase',
+                type: 'line',
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'top'
+                    }
+                },
+                data: firebaseArr
+            }]
+        };
+
+        var optionSo = {
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross',
+                    crossStyle: {
+                        color: '#999'
+                    }
+                }
+            },
+            toolbox: {
+                feature: {
+                    dataView: {
+                        show: false,
+                        readOnly: false,
+                        title: "Data View"
+                    },
+                    magicType: {
+                        show: true,
+                        type: ['line', 'bar'],
+                        title: 'Magic Type'
+                    },
+                    restore: {
+                        show: true,
+                        title: "Restore"
+                    },
+                    saveAsImage: {
+                        show: true,
+                        title: "Save Image"
+                    }
+                }
+            },
+            legend: {
+                data: ['Android', 'Firebase']
+            },
+            xAxis: [{
+                type: 'category',
+                data: monthArr,
+                axisPointer: {
+                    type: 'shadow'
+                }
+            }],
+            yAxis: [{
+                type: 'value',
+                name: 'So',
+                min: 0,
+                //max: 5,
+                interval: 10,
+                axisLabel: {
+                    formatter: '{value}'
+                }
+            }],
+            series: [{
+                name: 'Android',
+                type: 'line',
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'top'
+                    }
+                },
+                data: androidSOArr
+            }, {
+                name: 'Firebase',
+                type: 'line',
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'top'
+                    }
+                },
+                data: firebaseSOArr
+            }]
+        };
+
+        incomingChart.setOption(optionIncoming);
+        soChart.setOption(optionSo);
+
+    });
+</script>
+
+{% endblock %}

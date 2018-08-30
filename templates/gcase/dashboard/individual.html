@@ -1,0 +1,51 @@
+ <div class="table-responsive">
+                      	
+                      	<table border="1" class="complexTbl">
+                      	<thead>
+                      		<tr>
+                      		
+                      		<th>Maember</th>
+                      		<th>Assigned</th>
+                          	<th>Need info</th>
+                          	<th>In Consult</th>
+                          	<th>Blocked</th>
+                          	<th>Review requested</th>
+                          	<th style="background-color:#b2cdff">Backlog</th>
+                          	<th style="background-color:#ccffcc">This week SO</th>
+                          	
+                          	</tr>
+                          </thead>
+                          <tbody>
+                          		{% for item  in individual_list %}
+                          		<tr>
+                          			<td>
+                          				{{ item.name}}
+                          			</td>
+                          			<td>
+                          				{{ item.assigned }}
+                          			</td>
+                          			<td>
+                          				{{ item.needinfo }}
+                          			</td>
+                          			<td>
+                          				{{ item.inconsult }}
+                          			</td>
+                          			<td>
+                          				{{ item.blocked }}
+                          			</td>
+                          			<td>
+                          				{{ item.review_requested }}
+                          			</td>
+                          			<td>
+                          				{{ item.backlog }}
+                          			</td>
+                          			<td>
+                          				{{ item.solution_offered }}
+                          			</td>
+                          		</tr>
+                          		{% endfor %}	
+                          </tbody>
+                          	
+                     
+                      </table>
+                      </div>

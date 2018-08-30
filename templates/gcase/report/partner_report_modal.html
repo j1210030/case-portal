@@ -1,0 +1,72 @@
+<div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+
+                        <div class="modal-header">
+                          <h4 class="modal-title" id="myModalLabel2">
+                          {% if product_id == '1' %}
+                          <img src="{{ MEDIA_URL }}products/2017/08/android.png" class="img-rounded" alt="Logo" width="20" height="20">&nbsp;Android:
+                          {% else %}
+                          <img src="{{ MEDIA_URL }}products/2017/08/firebase.png" class="img-rounded" alt="Logo" width="20" height="20">&nbsp;Firebase:
+                          {% endif %}
+                          &nbsp; <i>Case reported by partner ( {{ period }})</i> 
+                          </h4>
+                        </div>
+                 <div class="modal-body">
+                        
+                        
+                   
+
+
+                    <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                      <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                        <li role="presentation" class="active">
+                        	<a href="#tab_ja" id="ja-tab" role="tab" data-toggle="tab" aria-expanded="true">
+                        		<img src="/static/images/flags/jp.png" class="img-rounded" alt="Logo" width="20" height="20">&nbsp;Japan
+                        	</a>
+                        </li>
+                        <li role="presentation" class="">
+                        <a href="#tab_ko" role="tab" id="ko-tab" data-toggle="tab" aria-expanded="false">
+                        	 <img src="/static/images/flags/ko.png" class="img-rounded" alt="Logo" width="20" height="20">&nbsp;Korea
+                        </a>
+                        
+                        </li>
+                        
+                        <li role="presentation" class="">
+                        <a href="#tab_zh" role="tab" id="zh-tab" data-toggle="tab" aria-expanded="false">
+                        	 <img src="/static/images/flags/zh.png" class="img-rounded" alt="Logo" width="20" height="20">&nbsp;China
+                        </a>
+                        
+                        </li>
+                     
+                      </ul>
+                      <div id="myTabContent" class="tab-content">
+                      
+                        <div role="tabpanel" class="tab-pane fade active in" id="tab_ja" aria-labelledby="home-tab">
+                        {% include "gcase/report/partner/detail.html" with border_color='#0000b2' total_list=total_list_jp %} 
+                        </div>
+                        
+                        <div role="tabpanel" class="tab-pane fade" id="tab_ko" aria-labelledby="profile-tab">
+                       	{% include "gcase/report/partner/detail.html" with border_color='#b34d4d' total_list=total_list_ko %}                        
+                        </div>
+                        
+                     
+                        <div role="tabpanel" class="tab-pane fade" id="tab_zh" aria-labelledby="home-tab">
+                      	{% include "gcase/report/partner/detail.html" with border_color='#e50000' total_list=total_list_zh  %}
+                        </div>
+                        
+                        
+                      </div>
+                      
+                    </div>
+                      
+                     
+                   
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">Close</button>
+                         
+                        </div>
+
+                      </div>
+                      
+                  </div>

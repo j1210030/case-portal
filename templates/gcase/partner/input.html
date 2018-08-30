@@ -1,0 +1,124 @@
+{% extends 'gcase/common/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+
+<div class="">
+            <div class="page-title">
+              <div class="title_left">
+                <h3><i class="fa fa-exchange"></i> Add/Update partners <small><i> ( {{ geo_location | upper }} ) </i></small></h3>
+                
+              </div>
+
+              <div class="title_right">
+                
+              </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+              <div class="col-md-9 col-sm-9 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h4>
+                    {% if id %}
+                    	<i class="fa fa-edit"></i> Edit partner
+                    {% else %}
+                    <i class="fa fa-plus"></i> Add new 
+                    {% endif %}
+                    <small><i> ( {{ geo_location | upper }} ) </i></small>
+                    </h4>
+                    
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                  		
+                  		{% include 'gcase/common/show_message.html' %}
+                       <form id="demo-form" data-parsley-validate class="form-horizontal form-label-left" method="POST">
+						 {% csrf_token %}
+						<input type="hidden" name="id" value="{{ id }}" readonly />
+						<input type="hidden" name="hl" value="{{ hl }}" readonly />
+						<input type="hidden" name="geo_location" value="{{ hl }}" readonly />
+						
+						
+						<div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name_english">Name(English) <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                        	{{ form.name_english }}		
+                         
+                        </div>
+                      </div>
+                      
+                      
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name_locale">Name({{ hl | upper }}) <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          {{ form.name_locale }}	
+                        </div>
+                      </div>
+                      
+                      
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="company_url">Company web site
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                        	{{ form.company_url }}		
+                         
+                        </div>
+                      </div>
+                      
+                       <div class="item form-group">
+                        	<label class="control-label col-md-3 col-sm-3 col-xs-12" for="Added on">Added on<span class="required">*</span>
+                      		 </label>
+                       		<div class="col-md-6 col-sm-6 col-xs-12">
+                       			{{ form.created }}
+                       			<span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
+                                <span id="inputSuccess2Status" class="sr-only">(success)</span>
+                       		</div>
+                       </div>
+                       
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="company_url">Status  <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                        	
+                        	<div class="radio">
+                        	
+                            <label>
+                              <input type="radio" name="is_active" value="True" class="flat" id="id_is_active_0" {% if form.is_active.value == True %} checked="checked" {% endif %}/> Active
+                            </label>
+                          </div>
+                          <div class="radio">
+                            <label>
+                              <input type="radio" name="is_active" value="False" class="flat" id="id_is_active_1" {% if  form.is_active.value == False %} checked="checked" {% endif %}/> In active
+                            </label>
+                          </div>
+                          
+          
+                        </div>
+                      </div>
+                      
+                      <div class="ln_solid"></div>
+                      <div class="form-group">
+                        <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+                          <button type="button" class="btn btn-warning"><i class="fa fa-times"></i> Cancel</button>
+                          <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Submit</button>
+                        </div>
+                      
+                      </div>
+                      	
+                      		
+                    </form>
+                      
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+{% endblock %}

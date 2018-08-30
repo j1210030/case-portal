@@ -1,0 +1,317 @@
+{% extends 'gcase/common/base.html' %}
+{% load staticfiles %}
+{% block js %}
+<script src="{% static 'js/ajax/partner_non_partner.js' %}"></script>
+{% endblock %}
+{% block content %}
+
+
+<div class="">
+            <div class="page-title">
+              <div class="title_left">
+                <h3><i class="fa fa-cubes"></i> Weekly Partner Non Partner Report&nbsp;
+                <small><span style="color:#cc0000">{{ period }}</span></small></h3>
+              </div>
+            </div>
+            
+            <div class="clearfix"></div>
+
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2><small>Search</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+                    <form class="form-horizontal form-label-left input_mask">
+      			
+                      <div class="col-md-2 col-sm-2 col-xs-12 form-group has-feedback">
+                      			<label>
+                      			From
+                      			</label>
+                          		<select name="from_year" id="from_year" class="form-control">
+                          			<option value="">Year</option>
+                          			{% for year in from_year_options %}
+                          			<option value="{{ year }}" {% if year == from_year %} selected {% endif %}>{{ year }}</option>
+                          			{% endfor %}
+                          		</select>
+                   	</div>
+                   	 <div class="col-md-2 col-sm-2 col-xs-12 form-group has-feedback">
+                   	 			<label>
+                      			
+                      			</label>
+                          		<select name="from_month" id="from_month" class="form-control">
+                          			<option value="">Month</option>
+                          			{% for month in month_options %}
+                          			<option value="{{ month }}" {% if month == from_month %} selected {% endif %} >{{ month }}</option>
+                          			{% endfor %}
+                          		</select>
+                   	</div>
+                   	
+                   	
+                   	<div class="col-md-2 col-sm-2 col-xs-12 form-group has-feedbac">
+                   	</div>
+                  
+                   	<div class="col-md-2 col-sm-2 col-xs-12 form-group has-feedbac">
+                          		<label>To</label>
+                          		<select name="to_year" id="to_year" class="form-control">
+                          			<option value="">Year</option>
+                          			{% for year in to_year_options %}
+                          			<option value="{{ year }}" {% if year == to_year %} selected {% endif %}>{{ year }}</option>
+                          			{% endfor %}
+                          		</select>
+                   	</div>
+                   	 <div class="col-md-2 col-sm-2 col-xs-12 form-group has-feedbac">
+                   	 	<label></label>
+                          		<select name="to_month" id="to_month" class="form-control">
+                          			<option value="">Month</option>
+                          			{% for month in month_options %}
+                          			<option value="{{ month }}" {% if month == to_month %} selected {% endif %}>{{ month }}</option>
+                          			{% endfor %}
+                          		</select>
+                   	</div>
+                   	
+  					<div class="form-group pull-right">
+  						<div class="col-md-12 col-sm-9">
+                         <input type="checkbox" name="csv"  value="1" /> CSV Download &nbsp;&nbsp;
+                          <button type="submit"  class="btn btn-sm btn-rounded btn-primary"> <i class="fa fa-search"></i>&nbsp;Submit</button>
+                        </div>
+                      </div>
+                      
+                    </form>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+          
+            <div class="clearfix"></div>
+
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  
+                  <div class="x_content">
+                  	{% include 'gcase/common/show_message.html' %}
+                      {% if total_list %}
+                      
+                      <div class="table-responsive">
+                      	
+                      	
+                      	<table class="table table-bordered">
+                      	<tr>
+                      		<th style="text-align:left;border-bottom: 2px solid #0000cc;">
+                      			<span style="font-size:110%">Total</span>
+                      		</th>
+                      	</tr>
+                      	<tr>
+                      		<td>
+                      			  {% include "gcase/report/partner_nonpartner/total.html"  %}  
+                      		</td>
+                      	</tr>
+                      	
+                      	<tr>
+                      		<th style="text-align:left;border-bottom: 2px solid #9ACD32;">
+                      			<img src="{{ MEDIA_URL }}products/2017/08/android.png" class="img-rounded" alt="Logo" width="20" height="20">
+                      			<span style="font-size:110%">Android</span>
+                      		</th>
+                      	</tr>
+                      	<tr>
+                      		<td>
+                      			  {% include "gcase/report/partner_nonpartner/product.html" with product=1 %}  
+                      		</td>
+                      	</tr>
+                      	
+                      	<tr>
+                      		<th style="text-align:left;border-bottom: 2px solid #ffc04c;">
+                      			<img src="{{ MEDIA_URL }}products/2017/08/firebase.png" class="img-rounded" alt="Logo" width="20" height="20">
+                      			<span style="font-size:110%">Firebase</span>
+                      		</th>
+                      	</tr>
+                      	<tr>
+                      		<td>
+                      			   {% include "gcase/report/partner_nonpartner/product.html" with product=2 %}  
+                      		</td>
+                      	</tr>
+                      	
+                      </table>
+                      </div>
+                      {% endif %}
+                      
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!--  chart -->
+          <div class="clearfix"></div>
+
+            <div class="row">
+            	
+              	<div class="col-md-6 col-sm-6 col-xs-12">
+                	<div class="x_panel">
+                	
+                		 <div class="x_title">
+                    	<h2><small>Incoming graph(Android)</small></h2>
+                    	<ul class="nav navbar-right panel_toolbox">
+                     	 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  
+            			<div class="x_content">
+                    		<div id="echart_incoming_android" style="height:350px;"></div>
+                  		</div>
+                  	</div>
+            	
+            	</div>
+            	
+            	
+            	<div class="col-md-6 col-sm-6 col-xs-12">
+                	<div class="x_panel">
+                	
+                		 <div class="x_title">
+                    	<h2><small>So graph(Android)</small></h2>
+                    	<ul class="nav navbar-right panel_toolbox">
+                     	 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  
+            		<div class="x_content">
+                    		<div id="echart_so_android" style="height:350px;"></div>
+                  	</div>
+                  </div>
+            	
+            	</div>
+            	
+          </div>
+          
+           
+           <div class="clearfix"></div>
+
+            	<div class="row">
+              	<div class="col-md-6 col-sm-6 col-xs-12">
+                	<div class="x_panel">
+                	
+                		 <div class="x_title">
+                    	<h2><small>Incoming graph(Firebase)</small></h2>
+                    	<ul class="nav navbar-right panel_toolbox">
+                     	 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  
+            			<div class="x_content">
+                    		<div id="echart_incoming_firebase" style="height:350px;"></div>
+                  		</div>
+                  	</div>
+            	
+            	</div>
+            	
+            	<div class="col-md-6 col-sm-6 col-xs-12">
+                	<div class="x_panel">
+                	
+                		 <div class="x_title">
+                    	<h2><small>So graph(Firebase)</small></h2>
+                    	<ul class="nav navbar-right panel_toolbox">
+                     	 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  
+            			<div class="x_content">
+                    		<div id="echart_so_firebase" style="height:350px;"></div>
+                  		</div>
+                  	</div>
+            	
+            	</div>
+            	
+            	
+            	
+          </div>
+          
+          
+          
+    </div>
+    
+
+<script>
+$(document).ready(function() {
+	console.log(' Echart is called--');
+	
+	 var themeAndroid = {
+				  color: [
+					  '#9ACD32','#34495E'
+				  ]
+	 }
+	 
+	 var themeFirebase = {
+			  color: [
+				  '#ffc04c','#34495E'
+			  ]
+	}
+	 
+	 
+	 var weekArr = [];   
+	 var incomingAndroid = [];
+	 var incomingPercentAndroid = [];
+	 
+	 var incomingFirebase = [];
+	 var incomingPercentFirebase = [];
+	 
+	 var soAndroid = [];
+	 var soPercentAndroid = [];
+	 
+	 var soFirebase = [];
+	 var soPercentFirebase = [];
+	
+	 {% for item in incoming_so_list reversed %}
+	 	
+	 	{% if item.product_id == 1 %}
+	 	
+	 		incomingAndroid.push('{{item.incoming}}');
+	 		incomingPercentAndroid.push('{{ item.incoming_percent }}');
+	 		
+	 		soAndroid.push('{{ item.so}}');
+	 		soPercentAndroid.push('{{ item.so_percent }}');
+	 		
+	 	{% endif %}
+	 	
+	 	{% if item.product_id == 2 %}	
+    		weekArr.push('{{ item.week | date:"d.m" }}');
+    		incomingFirebase.push('{{item.incoming}}');
+	 		incomingPercentFirebase.push('{{ item.incoming_percent }}');
+    		
+	 		soFirebase.push('{{ item.so}}');
+	 		soPercentFirebase.push('{{ item.so_percent }}');
+    	{% endif %}
+	 
+    	
+    {% endfor %} 
+	 
+	 console.log(weekArr);
+
+	 incoming_chart(weekArr,incomingAndroid,incomingPercentAndroid,themeAndroid, 'echart_incoming_android' );
+	 incoming_chart(weekArr,incomingFirebase,incomingPercentFirebase,themeFirebase, 'echart_incoming_firebase' );
+	
+	 so_chart(weekArr,soAndroid,soPercentAndroid,themeAndroid, 'echart_so_android' );
+	 so_chart(weekArr,soFirebase,soPercentFirebase,themeFirebase, 'echart_so_firebase' );
+    return false;
+});
+</script>
+
+{% endblock %}
+
+

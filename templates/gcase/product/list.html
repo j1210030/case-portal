@@ -1,0 +1,86 @@
+{% extends 'gcase/common/base.html' %}
+{% load staticfiles %}
+{% block js %}
+<script src="{% static 'js/ajax/product/call.js' %}"></script>
+{% endblock %}
+{% block content %}
+
+
+<div class="">
+            <div class="page-title">
+              <div class="title_left">
+                <h3><i class="fa fa-exchange"></i> Products</h3>
+                
+              </div>
+
+              <div class="pull-right">
+                    <a href="/product/add" class="btn btn-round btn-primary btn-sm"><i class="fa fa-plus"></i> Add new</a>
+              </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  
+                  <div class="x_content">
+                  	{% include 'gcase/common/show_message.html' %}
+                      {% if product_list %}
+                      <table  class="table  table-bordered dt-responsive" cellspacing="0" width="100%">
+                      <thead>
+                        <tr>
+                          
+                          <th>Name</th>
+                          <th>Status</th>
+        				  <th>Added on</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {% for product in product_list %}
+                        <tr>
+                        
+                        <td style="vertical-align:middle">
+                        
+                        {% if product.logo_file %}
+                        
+                         <img src="{{ MEDIA_URL }}{{ product.logo_file }}" class="img-thumbnail" alt="Logo" width="30" height="30"> 
+                        {% endif %}
+                        <strong>{{ product.name }}</strong>
+                        </td>
+                        <td style="text-align:center">
+                        {% if product.active %}
+                        
+                        <i class="fa fa-square green"></i>
+                        	
+                        {% else %}
+                        	<i class="fa fa-square default"></i>
+                        {% endif %}
+                        </td >
+                        
+                         <td style="vertical-align:middle">{{ product.created }}</td>
+                        
+                        <td style="vertical-align:middle">
+                        	<a href="/product/edit?id={{ product.id }}" role="button" class="btn btn-round btn-info btn-xs"> <i class="fa fa-edit"></i> Edit</a>
+                       
+                       		<button type="button" class="btn btn-round btn-success btn-xs"><i class="fa fa-tags"></i> Components</button>
+                        	<a href="/product/delete?id={{ product.id }}" role="button" class="btn btn-round btn-danger btn-xs" data-toggle="confirmation"  data-title="Are you sure to delete this product?"><i class="fa fa-trash"></i> Delete</a>
+                        </td>
+                                                           
+                        </tr>
+                       {% endfor %}  
+                       </tbody>
+                       
+                      </table>
+                      
+                       {% endif %}
+                      
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+{% endblock %}

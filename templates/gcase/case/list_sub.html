@@ -1,0 +1,113 @@
+<table id="datatable-responsive-{{ status }}" class="table table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                      <thead>
+                        <tr>
+                        
+                          <th>Id</th>
+                          <th>Language</th>
+                          <th>Product</th>
+                          <th>Component</th>
+                          <th>Assignee</th>
+                          <th>Incoming date</th>
+                          {% if status != 'solution_offered'  and status != 'routed' and status != 'forwarded' %}
+                          <th>Age</th>
+                          {% endif %}
+                          
+                          {% if status == 'solution_offered' %}
+                          <th>SO Date</th>
+                          {% elif status == 'blocked' %}
+                          <th>Buganizer no</th>
+                          {% elif status == 'routed_forwarded' %}
+                          <th>Status</th>
+                           {% endif %}
+                          <th style="width:80px">Partner</th>
+                          <th>Action</th>
+                         
+                        </tr>
+                      </thead>
+                      <tbody>
+                     	 {% for case in case_list %}
+                     	 
+                     	  {% if status == case.status %}
+                        <tr>
+                        <td title='{{ case.subject }}' class='{{ case.status}}' style="vertical-align:middle">
+                        <a href="https://cases.corp.google.com/Client.html#e{{ case.id }}" target='_blank'>{{ case.id }}</a>
+                        </td>
+                        <td class='{{ case.status}}' style="vertical-align:middle">{{ case.get_language_display }}</td>
+                        <td class='{{ case.status}}' style="vertical-align:middle">
+                        	
+                        	<img src="{{ MEDIA_URL }}{{ case.product.logo_file }}" class="img-rounded" alt="Logo" width="25" height="25"> 
+                        	
+                        	<span style="">
+                        		{{ case.sub_product | title }}
+                        	</span>
+                        </td>
+                        <td class='{{ case.status}}' style="vertical-align:middle">
+                        {{ case.component.name | default_if_none:"" }}
+                        </td>
+                        <td class='{{ case.status}}' style="vertical-align:middle">
+                        	{{ case.gcase_user.user.first_name }} 
+                        </td>
+                        
+                        <td class='{{ case.status}}' style="vertical-align:middle">{{ case.incoming_date | date:"d.m.y H:i" }}</td>
+                        {% if status != 'solution_offered' and status != 'forwarded' and status != 'routed' %}
+                        <td class='{{ case.status}}'>	
+                       		{{ case.get_age }}
+                       </td>
+                       {% endif %}	
+                       
+                       {% if status == 'routed_forwarded' or status == 'solution_offered' or status == 'blocked' or status == 'routed_forwarded' %}
+                        <td class='{{ case.status}}' width="110px" style="vertical-align:middle">
+                        	{% if status == 'solution_offered' %}
+                        		
+                       				<span id="so_date_span-{{ case.id }}">{{ case.so_date | date:"d.m.y" }}</span>
+                       			{% if not case.so_date %}
+                       				<input name="so_date" id="so_date-{{ case.id }}" placeholder="mm/dd/yy" class="form-control" onChange="setSoDate2Case(this,'{{ case.id }}','{{ case.language }}');" />
+                       			{% endif %}
+                       		{% elif case.status == 'blocked' %}
+                       		
+                       			{% if case.buganizer_number %}
+                       			<a href="https://buganizer.corp.google.com/issues/{{ case.buganizer_number }}">b/{{ case.buganizer_number }}</a>
+                       			{% else %}
+                       				<input name="buganizer" id="buganizer-{{ case.id }}"  class="form-control" onChange="setBuganizer2Case(this,'{{ case.id }}','{{ case.language }}');" />
+                       				<span id="buganizer_span-{{ case.id }}"></span>
+                       			{% endif %}
+                       			
+                       		{% elif status == 'routed_forwarded' %}
+                       			{% if case.status == 'routed' %}
+                       				Routed
+                       			{% elif case.status == 'forwarded' %}
+                       				Forwarded
+                       			{% endif %}
+                       		{% endif %}
+                        </td>
+                        {% endif %}
+                       
+                        <td class='{{ case.status}}' width="110px" style="vertical-align:middle">
+                       
+                       
+                        {% if case.partner %}
+                         <div style="width:150px; text-overflow:ellipsis; white-space:nowrap; overflow:hidden;">{{ case.partner.name_english }}</div>
+                        {% else %}
+                        	<i class="fa fa-circle-o"></i>
+                        {% endif %}
+                        </td>
+                        
+                        <td class='{{ case.status}}' style="vertical-align:middle">
+                         {% if case.partner.name_english and case.status != 'solution_offered' %}
+                       	<a href="/review_request/add?cid={{ case.id }}" role="button" class="btn btn-round btn-info btn-xs"><i class="fa fa-tag"></i> Review</a>
+                        {% endif %}
+                        
+                        <a href="/case/edit?id={{ case.id }}&language={{ case.language }}" role="button" class="btn btn-round btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+                           {% if request.user.is_superuser == 1 %}
+                        	<a href="/case/delete?id={{ case.id }}&language={{ case.language }}" role="button" class="btn btn-round btn-danger btn-xs"><i class="fa fa-trash"></i> Delete</a>
+                        {% endif %}
+                        </td>
+                       
+                                                           
+                        </tr>
+                       
+                        {% endif %}
+                       {% endfor %}  
+                       </tbody>
+                       
+                      </table>

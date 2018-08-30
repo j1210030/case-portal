@@ -1,0 +1,379 @@
+{% extends 'gcase/common/base.html' %}
+{% load staticfiles %}
+{% block js %}
+
+{% endblock %}
+{% block content %}
+
+
+<div class="">
+            <div class="page-title">
+              <div class="title_left">
+                <h4><i class="fa fa-tags"></i> Review Request Records </h4>
+                
+              </div>
+            </div>
+            
+            <div class="clearfix"></div>
+
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2><small>Search</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+                    <form class="form-horizontal form-label-left input_mask">
+      			
+                      <div class="col-md-2 col-sm-2 col-xs-12 form-group has-feedback">
+                      			<label>
+                      			From
+                      			</label>
+                          		<select name="from_year" id="from_year" class="form-control">
+                          			<option value="">Year</option>
+                          			{% for year in from_year_options %}
+                          			<option value="{{ year }}" {% if year == from_year %} selected {% endif %}>{{ year }}</option>
+                          			{% endfor %}
+                          		</select>
+                   	</div>
+                   	 <div class="col-md-2 col-sm-2 col-xs-12 form-group has-feedback">
+                   	 			<label style="color:white;">
+                      			month
+                      			</label>
+                          		<select name="from_month" id="from_month" class="form-control">
+                          			<option value="">Month</option>
+                          			{% for month in month_options %}
+                          			<option value="{{ month }}" {% if month == from_month %} selected {% endif %} >{{ month }}</option>
+                          			{% endfor %}
+                          		</select>
+                   	</div>
+                   	
+                   	
+                   	<div class="col-md-2 col-sm-2 col-xs-12 form-group has-feedbac">
+                   	</div>
+                  
+                   	<div class="col-md-2 col-sm-2 col-xs-12 form-group has-feedbac">
+                          		<label>To</label>
+                          		<select name="to_year" id="to_year" class="form-control">
+                          			<option value="">Year</option>
+                          			{% for year in to_year_options %}
+                          			<option value="{{ year }}" {% if year == to_year %} selected {% endif %}>{{ year }}</option>
+                          			{% endfor %}
+                          		</select>
+                   	</div>
+                   	 <div class="col-md-2 col-sm-2 col-xs-12 form-group has-feedbac">
+                   	 	<label style="color:white;">
+                      			month
+                      			</label>
+                          		<select name="to_month" id="to_month" class="form-control">
+                          			<option value="">Month</option>
+                          			{% for month in month_options %}
+                          			<option value="{{ month }}" {% if month == to_month %} selected {% endif %}>{{ month }}</option>
+                          			{% endfor %}
+                          		</select>
+                   	</div>
+                   	
+  					<div class="form-group pull-right">
+  						<div class="col-md-12 col-sm-9">
+                         <input type="checkbox" name="csv"  value="1" /> CSV Download &nbsp;&nbsp;
+                          <button type="submit"  class="btn btn-sm btn-rounded btn-primary"> <i class="fa fa-search"></i>&nbsp;Submit</button>
+                        </div>
+                      </div>
+                      
+                    </form>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+          
+            <div class="clearfix"></div>
+
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  
+                  <div class="x_content">
+                  	{% include 'gcase/common/show_message.html' %}
+                      {% if total_list %}
+                      
+                      <div class="table-responsive">
+                      	
+                      	
+                      	<table class="table table-bordered">
+                      	<tr>
+                      		<th style="text-align:left;border-bottom: 2px solid #0000cc;">
+                      			<span style="font-size:110%">Total</span>
+                      		</th>
+                      		<th style="text-align:left;border-bottom: 2px solid #9ACD32;">
+                      			<img src="{{ MEDIA_URL }}products/2017/08/android.png" class="img-rounded" alt="Logo" width="20" height="20">
+                      			<span style="font-size:110%">Android</span>
+                      		</th>
+                      		
+                      		<th style="text-align:left;border-bottom: 2px solid #ffc04c;">
+                      			<img src="{{ MEDIA_URL }}products/2017/08/firebase.png" class="img-rounded" alt="Logo" width="20" height="20">
+                      			<span style="font-size:110%">Firebase</span>
+                      		</th>
+                      		
+                      	</tr>
+                      	<tr>
+                      		<td style="width:300px">
+                      			  {% include "gcase/report/sub_review_request/total.html"  %}  
+                      		</td>
+                      	
+                      	
+                      		<td style="width:300px">
+                      			  {% include "gcase/report/sub_review_request/product.html" with product=1 %}  
+                      		</td>
+                      	
+                      		<td style="width:300px">
+                      			   {% include "gcase/report/sub_review_request/product.html" with product=2 %}  
+                      		</td>
+                      	</tr>
+                      	
+                      </table>
+                      </div>
+                      {% endif %}
+                      
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!--  chart (Android)-->
+            <div class="clearfix"></div>
+
+            <div class="row">
+              		<div class="col-md-12 col-sm-12 col-xs-12">
+                	<div class="x_panel">
+            			<div class="x_content">
+                    		<div id="echart_review_request_android" style="height:300px;"></div>
+                  		</div>
+                  	</div>
+            	
+            	</div>
+          </div>
+          
+          <!--  chart (Firebase)-->
+            <div class="clearfix"></div>
+
+            <div class="row">
+              		<div class="col-md-12 col-sm-12 col-xs-12">
+                	<div class="x_panel">
+            			<div class="x_content">
+                    		<div id="echart_review_request_firebase" style="height:300px;"></div>
+                  		</div>
+                  	</div>
+            	
+            	</div>
+          </div>
+    </div>
+    
+   <script>
+	$(document).ready(function() {
+	
+		console.log(' Echart is called--');
+		//var backlogChart = echarts.init($('#echart_backlog'));
+	
+		var weekArrFirebase = [];
+		var weekArrAndroid = [];
+		var androidOKArr = [];
+		var firebaseOKArr = [];
+		var androidMonthArr = [];
+		var firebaseMonthArr = [];
+	 	{% for item in week_list_android %}
+	 		weekArrAndroid.push('{{ item.week | date:"d.m.y" }}');
+	 	{% endfor %}
+	 	
+	 	{% for item in week_list_firebase %}
+ 			weekArrFirebase.push('{{ item.week | date:"d.m.y" }}');
+ 		{% endfor %}
+ 		
+ 		 {% for item in review_list.reverse %}
+     	 	{% if item.product.id == 1 %}
+     	 		androidOKArr.push('{{ item.ok_ratio }}') ;
+     	 		androidMonthArr.push('{{ item.monthly_ratio }}') 
+     	 	{% endif %}
+			{% if item.product.id == 2 %}
+				firebaseOKArr.push('{{ item.ok_ratio }}') ;
+ 	 			firebaseMonthArr.push('{{ item.monthly_ratio }}'); 
+     	 	{% endif %}
+     	 {% endfor %}
+     	 	
+	
+	 var themeAndroid = {
+				  color: [
+					  '#9ACD32', '#5c7b1e'
+				  ]
+	 }
+	 
+	 var themeFirebase = {
+			  color: [
+				  '#b28635', '#ffc04c'
+			  ]
+	}
+	 
+	var androidChart = echarts.init(document.getElementById('echart_review_request_android'),themeAndroid);
+	var firebaseChart = echarts.init(document.getElementById('echart_review_request_firebase'),themeFirebase);
+	
+
+	var optionAndroid = {
+			title: {
+		        text: 'Quality chart (Android)',
+		    },
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'cross',
+            crossStyle: {
+                color: '#999'
+            }
+        }
+    },
+    toolbox: {
+        feature: {
+            dataView: {show: false, readOnly: false, title:"Data View"},
+            magicType: {show:true, type: ['line', 'bar'],title:'Magic Type'},
+            restore: {show: true,title: "Restore"},
+            saveAsImage: {show: true,title: "Save Image"}
+        }
+    },
+    legend: {
+        data:['Weekly','Monthly']
+    },
+    xAxis: [
+        {
+            type: 'category',
+            data: weekArrAndroid,
+            axisPointer: {
+                type: 'shadow'
+            },
+            z: 100,
+            blendMode: 'lighter'
+        }
+    ],
+    yAxis: [
+        {
+            type: 'value',
+            name: 'Ratio(%)',
+            min: 0,
+            //max: 5,
+            //interval: 10,
+            axisLabel: {
+                formatter: '{value}'
+            }
+        }
+    ],
+    series: [
+        {
+            name:'Weekly',
+            type:'line',
+            label: {
+                normal: {
+                    show: true,
+                    position: 'top'
+                }
+            },
+            data:androidOKArr
+        },
+        {
+            name:'Monthly',
+            type:'line',
+            label: {
+                normal: {
+                    show: true,
+                    position: 'top'
+                }
+            },
+            data:androidMonthArr
+        }
+    ]
+};
+   androidChart.setOption(optionAndroid);
+   
+   
+   
+   var optionFirebase = {
+			title: {
+		        text: 'Quality chart (Firebase)',
+		    },
+   tooltip: {
+       trigger: 'axis',
+       axisPointer: {
+           type: 'cross',
+           crossStyle: {
+               color: '#999'
+           }
+       }
+   },
+   toolbox: {
+       feature: {
+           dataView: {show: false, readOnly: false, title:"Data View"},
+           magicType: {show:true, type: ['line', 'bar'],title:'Magic Type'},
+           restore: {show: true,title: "Restore"},
+           saveAsImage: {show: true,title: "Save Image"}
+       }
+   },
+   legend: {
+       data:['Weekly','Monthly']
+   },
+   xAxis: [
+       {
+           type: 'category',
+           data: weekArrFirebase,
+           axisPointer: {
+               type: 'shadow'
+           }
+       }
+   ],
+   yAxis: [
+       {
+           type: 'value',
+           name: 'Ratio(%)',
+           min: 0,
+           //max: 5,
+           //interval: 10,
+           axisLabel: {
+               formatter: '{value}'
+           }
+       }
+   ],
+   series: [
+       {
+           name:'Weekly',
+           type:'line',
+           label: {
+               normal: {
+                   show: true,
+                   position: 'top'
+               }
+           },
+           data:firebaseOKArr
+       },
+       {
+           name:'Monthly',
+           type:'line',
+           label: {
+               normal: {
+                   show: true,
+                   position: 'top'
+               }
+           },
+           data:firebaseMonthArr
+       }
+   ]
+};
+   
+   firebaseChart.setOption(optionFirebase); 
+   
+});
+</script>
+
+{% endblock %}

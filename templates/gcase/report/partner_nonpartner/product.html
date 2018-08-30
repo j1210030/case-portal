@@ -1,0 +1,30 @@
+
+					<table border="1" class="complexTbl">
+                      		<thead>
+                        	<tr class="headings">
+                          	<th style="width:150px">Week</th>
+                          	<th style="background-color: #B0E2FF;width:130px">Incoming</th>
+                          	<th style="background-color: #B0E2FF;width:130px">Incoming partner</th>
+                          	<th style="background-color: #B0E2FF;width:130px">Incoming Percent</th>
+                          	<th style="background-color: #ffedcc;width:130px">So</th>
+                          	<th style="background-color: #ffedcc;width:130px">So Partner</th>
+                       		<th style="background-color: #ffedcc;width:130px">So Percent</th>
+                        	</tr>
+                      		</thead>
+                      	<tbody>
+                     	 {% for item in incoming_so_list %}
+                         {% if item.product_id == product %}	
+                        <tr>
+                        	<td>{{ item.week | date:"d.m.y" }}</td>
+                            <td>{{ item.incoming }}</td>
+                            <td>{{ item.incoming_partner }}</td>
+                            <td>{{ item.incoming_percent }}</td>
+                            <td>{{ item.so }}</td>
+                            <td>{{ item.so_partner }}</td>
+                            <td>{{ item.so_percent }}</td>
+                        </tr>
+                        {% endif %}
+                       {% endfor %}  
+                       </tbody>
+                       
+                      </table>

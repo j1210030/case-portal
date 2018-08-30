@@ -1,0 +1,28 @@
+<table border="1" class="complexTbl">
+                      	<thead>
+                      	<tr>
+                            <th>Partner ( English)</th>
+                            <th>Partner (Locale)</th>
+                            <th>Case count</th>
+                      	</tr>
+                      	</thead>
+                      	<tbody>
+                      	
+                      		
+                      		{% for report in partner_case_list %}
+                      			<tr>
+                      				
+                      				{% if report.4 == lang %}
+                      				
+                      				<td style="font-size:85%">{{ report.3 }}</td>
+                      				 <td style="font-size:85%">{{ report.2 | default_if_none:"" }}</td>
+                      				
+                      				<td>{{ report.1 }}</td>
+                      				
+                      				{% endif %}
+                      			</tr>
+                      			
+                      		
+                      		{% endfor %}
+                      	</tbody>
+                      	</table>

@@ -1,0 +1,25 @@
+					<table border="1" class="complexTbl">
+                      		<thead>
+                        	<tr class="headings">
+                          	<th>Week</th>
+                          	<th>OK</th>
+                          	<th>NG</th>
+                          	<th>Ratio(&#37;)</th>
+                          	<th>Monthly(&#37;)</th>
+                          	</tr>
+                      		</thead>
+                      	<tbody>
+                     	 {% for item in review_list %}
+                     	 {% if item.product.id == product %}
+                        <tr>
+                        	<td>{{ item.week | date:"d.m.Y" }}</td>
+                            <td>{{ item.ok_count }}</td>
+                            <td>{{ item.ng_count }}</td>
+                            <td>{{ item.ok_ratio }}</td>
+                            <td>{{ item.monthly_ratio }}</td>
+                        </tr>
+                        {% endif %}
+                       {% endfor %}  
+                       </tbody>
+                       
+                      </table>

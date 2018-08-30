@@ -1,0 +1,25 @@
+<table border="1" class="complexTbl">
+                      	<thead>
+                      	<tr>
+                            <th style="text-align:left;border-bottom: 2px solid {{ border_color }}">Partner</th>
+                            <th style="text-align:left;border-bottom: 2px solid {{ border_color }}">Case count</th>
+                      	</tr>
+                      	</thead>
+                      	<tbody>
+                      	
+                      		
+                      		{% for report in parter_case_list %}
+                      			<tr>
+                      				
+                      				<td>{{ report.partner }} 
+                      				 {% if report.partner.name_locale %}
+                      				 / {{ report.partner.name_locale }}
+                      				 {% endif %}
+                      				 </td>
+                      				<td>{{ report.total_case_count }}</td>
+                      			</tr>
+                      			
+                      		
+                      		{% endfor %}
+                      	</tbody>
+                      	</table>

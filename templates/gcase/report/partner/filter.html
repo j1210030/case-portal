@@ -1,0 +1,93 @@
+          <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2><small>Search</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+                    <form class="form-horizontal form-label-left input_mask">
+      				<div class="row">
+                      <div class="col-md-2 col-sm-2 col-xs-12 form-group has-feedback">
+                      			<label>
+                      			From
+                      			</label>
+                          		<select name="from_year" id="from_year" class="form-control">
+                          			<option value="">Year</option>
+                          			{% for year in from_year_options %}
+                          			<option value="{{ year }}" {% if year == from_year %} selected {% endif %}>{{ year }}</option>
+                          			{% endfor %}
+                          		</select>
+                   	</div>
+                   	 <div class="col-md-2 col-sm-2 col-xs-12 form-group has-feedback">
+                   	 			<label>
+                      			
+                      			</label>
+                          		<select name="from_month" id="from_month" class="form-control">
+                          			<option value="">Month</option>
+                          			{% for month in month_options %}
+                          			<option value="{{ month }}" {% if month == from_month %} selected {% endif %} >{{ month }}</option>
+                          			{% endfor %}
+                          		</select>
+                   	</div>
+                   	
+                   	
+                   	<div class="col-md-2 col-sm-2 col-xs-12 form-group has-feedbac">
+                   	</div>
+                  
+                   	<div class="col-md-2 col-sm-2 col-xs-12 form-group has-feedbac">
+                          		<label>To</label>
+                          		<select name="to_year" id="to_year" class="form-control">
+                          			<option value="">Year</option>
+                          			{% for year in to_year_options %}
+                          			<option value="{{ year }}" {% if year == to_year %} selected {% endif %}>{{ year }}</option>
+                          			{% endfor %}
+                          		</select>
+                   	</div>
+                   	 <div class="col-md-2 col-sm-2 col-xs-12 form-group">
+                   	 	<label></label>
+                          		<select name="to_month" id="to_month" class="form-control">
+                          			<option value="">Month</option>
+                          			{% for month in month_options %}
+                          			<option value="{{ month }}" {% if month == to_month %} selected {% endif %}>{{ month }}</option>
+                          			{% endfor %}
+                          		</select>
+                   	</div>
+                   	
+                   	</div>
+                   	
+                   	
+                   	<div class="row">
+                   	{% if action != 'partner_monthly' %}
+                   	 <div class="col-md-2 col-sm-2 col-xs-12 form-group">
+                   	 	<label>Product</label>
+                   	 	<select name="product" id="product" class="form-control">
+                        	<option value="">Product</option>
+                        	<option value="1" {% if product == '1' %} selected {% endif %}>Android</option>
+                        	<option value="2" {% if product == '2' %} selected {% endif %}>Firebase</option>
+                        </select>
+                   	</div>
+                   	{% endif %}
+  					<div class="form-group pull-right">
+  						<div class="col-md-12 col-sm-9">     
+  						{% if action != 'partner_monthly' %}
+  						  <input type="checkbox" name="csv"  value="1" /> CSV Download &nbsp;&nbsp;
+  						{% endif %}
+                          <button type="submit"  class="btn btn-sm btn-rounded btn-primary"> <i class="fa fa-search"></i>&nbsp;Submit</button>
+                        </div>
+                      </div>
+                      
+                   </div>
+                      
+                    </form>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            

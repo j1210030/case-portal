@@ -1,0 +1,261 @@
+{% extends 'gcase/common/base.html' %}
+{% load staticfiles %}
+
+{% block js %}
+<script src="{% static 'js/ajax/case.js' %}"></script>
+<script src="{% static 'js/ajax/case_input.js' %}"></script>
+{% endblock %}
+{% block content %}
+<style>
+</style>
+
+            <div class="row">
+              <div class="col-md-9 col-sm-9 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h4>
+                    {% if action == 'add' %}
+                    	 <i class="fa fa-plus"></i> Add New Case 
+                    {% else %}
+                   		<i class="fa fa-edit"></i> Edit Case record
+                    {% endif %}
+                   
+                    </h4>
+                    
+                    <div class="pull-right">
+                    	<a href="#" onclick="history.go(-1);return false;" class="btn btn-round btn-primary btn-sm"><i class="fa fa-arrow-left"></i> Back</a>
+              		</div>
+                    
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                  		
+                  		{% include 'gcase/common/show_message.html' %}
+                       <form id="gcaseForm" class="form-horizontal form-label-left" method="POST">
+						 {% csrf_token %}
+						 
+						 <input type="hidden" name="referer" value="{{ referer }}" />
+						 <input type="hidden" id="curr_component_id" name="curr_component_id" value="{{ form.component.value | default:'' }}" />
+						 <input type="hidden" id="curr_partner_id" name="curr_partner_id" value="{{ form.partner.value | default:'' }}" />
+					<div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name_english">gCase Id <span class="required text-danger">*</span>
+                        </label>
+                        <div class="col-md-3 col-sm-3 col-xs-12">
+                        	{% if action == 'edit'  %}
+                        	 <input type="text" class="form-control" value="{{ form.id.value }}" disabled='disabled' />
+                        	 <input type="hidden" name="id" value="{{ form.id.value }}" readonly />
+                        	{% else %}
+                        		{{ form.id }}
+                        	{% endif %}		
+                        	
+                        	
+                        </div>
+                        <div class="text-danger" id="case_already_exist_msg" style="display:none;">
+                          	<b><i>Case with this case id already exists.</i></b>
+                          </div>
+                     </div>
+                     
+                     <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name_english">Subject <span class="required text-danger">*</span>
+                        </label>
+                        <div class="col-md-7 col-sm-7 col-xs-12">
+                        	{{ form.subject }}		
+                        </div>
+                     </div>
+                      
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name_english">Incoming date <span class="required text-danger">*</span>
+                        </label>
+                        <div class="col-md-3 col-sm-3 col-xs-12">
+                        	{{ form.case_date }}	
+                        </div>
+                        
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                        	 <label class="control-label" for="name_english">
+                        	 	<span id="week-span" style="display:none"></span>
+                        	 	{{ form.week }}	
+                        	</label>
+                        	
+                        			
+                        </div>
+                      </div>
+                      
+                      
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name_locale">Language <span class="required text-danger">*</span>
+                        </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          
+                          <div class="radio">
+                        	
+                            <label>
+                            	
+                            	{% for key, value in language_choices.items %}
+                            	<span style="margin-right: 35px">
+                              	<input type="radio" name="language" value="{{ key }}"  id="language_{{ key }}" {% if form.language.value == key %} checked='checked' {% endif %}/> 
+                         		<img src="/static/images/flags/{{ key }}.png" class="img-rounded" alt="Logo" width="20" height="20"> 
+  								{{ value }}
+                              	</span>
+                              	{% endfor %}
+                            </label>
+                          </div>
+                          
+                        </div>
+                      </div>
+                      
+                      
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name_locale">Product <span class="required text-danger">*</span>
+                        </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          
+                          <div class="radio">
+                        	
+                            <label>
+                            	
+                            	{% for product in product_list %}
+                            	<span style="margin-right: 35px">
+                             	<input type="radio" name="product" value="{{ product.id }}"  id="product_{{ product.id }}" {% if form.product.value == product.id %} checked='checked' {% endif %}/> 
+                              
+                              	{% if product.logo_file %}
+                         		<img src="{{ MEDIA_URL }}{{ product.logo_file }}" class="img-rounded" alt="Logo" width="20" height="20"> 
+                       			 {% endif %}
+  								{{ product.name }}
+                        		</span>
+                              	
+                              	{% endfor%}
+                            </label>
+                          </div>
+                          
+                        </div>
+                      </div>
+                      
+                      
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name_locale">Sub product
+                        </label>
+                        
+                         <div class="col-md-4 col-sm-4 col-xs-12">
+                          {{ form.sub_product }} 
+                        </div>
+                       </div>
+                       
+                       <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name_locale">Component
+                        </label>
+                        
+                         <div class="col-md-4 col-sm-4 col-xs-12">
+                          {{ form.component }} 
+                        </div>
+                       </div>
+                       
+                       
+                       <div class="item form-group">
+                       
+                       			 
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name_locale">Partner location
+                        	</label>
+                        		
+                            <div class="col-md-4 col-sm-4 col-xs-12">
+                            	{{ form.partner_geo }} 
+                            </div>
+                          <div class="text-danger" id="partner_load_msg" style="display:none;">
+                          	<b><i>Please select language to load partners. </i></b>
+                          </div>
+                          <div class="text-danger" id="partner_notfound_msg" style="display:none;">
+                          	<b><i>System could not found any registered partner. </i></b>
+                          </div>
+                        </div>
+                        
+                        <div class="item form-group" id="partner_select_div" style="display:none;">
+                        	<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name_locale">Select partner <span class="required text-danger">*</span>
+                        	</label>
+                        
+                         	<div class="col-md-4 col-sm-4 col-xs-12">
+                          		{{ form.partner}} 
+                       		 </div>
+                        	<div class="col-md-2 col-sm-2 col-xs-12">
+                        		<span id="partner_loading" style="display:none;"> <img src='/static/images/loading.gif' /> </span>	
+                        	</div>
+                       </div>
+                       
+                       <div class="item form-group">
+                        	<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name_locale">Assignee<span class="required text-danger">*</span>
+                        	</label>
+                        
+                         	<div class="col-md-4 col-sm-4 col-xs-12">
+                          		<select name="gcase_user" id="gcase_user_id" class="form-control">
+                          			<option value="">Select</option>
+                          			{% for assignee in assignee_list %}
+                          			<option value="{{ assignee.id }}" {% if form.gcase_user.value == assignee.id %} selected='selected' {% endif %}>{{ assignee.name }}</option>
+                          			{% endfor %}
+                          		</select>
+                       		 </div>
+                        	
+                       </div>
+                       
+                       
+                       <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name_english">Difficulty level <span class="required text-danger">*</span>
+                        </label>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                        	{{ form.difficulty_level }}		
+                        </div>
+                      </div>
+                      
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name_english">Status <span class="required text-danger">*</span>
+                        </label>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                        	{{ form.status }}		
+                        </div>
+                      </div>
+                      
+                      <div class="item form-group" id="so_date_div" {% if form.status.value != 'solution_offered' %} style="display:none" {% endif %} >
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name_english">So date
+                        </label>
+                        <div class="col-md-3 col-sm-3 col-xs-12">
+                        	{{ form.so_date }}	
+                        </div>
+                      </div>
+                      
+                      <div class="item form-group" id="buganizer_id_div" {% if form.status.value != 'blocked' %} style="display:none" {% endif %}>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name_english">Buganizer id
+                        </label>
+                        <div class="col-md-3 col-sm-3 col-xs-12">
+                        	{{ form.buganizer_number }}	
+                        </div>
+                      </div>
+                      
+                      
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Comment
+                        </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                        	{{ form.remarks}}		
+                        </div>
+                     </div>
+                      
+                   
+                      <div class="ln_solid"></div>
+                      <div class="form-group">
+                        <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+                          <a href="{{ referer }}" type="button" class="btn btn-warning"><i class="fa fa-times"></i> Cancel</a>
+                          <button type="submit" id="caseSubmitBtn" class="btn btn-primary"><i class="fa fa-save"></i> Submit</button>
+                        </div>
+                        
+                        
+                      
+                      </div>
+                      	
+                      		
+                    </form>
+                      
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+
+
+{% endblock %}

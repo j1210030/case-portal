@@ -1,0 +1,24 @@
+<table border="1" class="complexTbl">
+                      	<thead>
+                      	<tr>
+                      		<th style="text-align:left;border-bottom: 2px solid #cc0000;">
+                      			<span style="font-size:110%">Year</span>
+                      		</th>
+                      		<th style="text-align:left;border-bottom: 2px solid #cc0000;">
+                      			<span style="font-size:110%">Month</span>
+                      		</th>
+                      		<th style="text-align:left;border-bottom: 2px solid #cc0000;">
+                      			<span style="font-size:110%">Total case reported</span>
+                      		</th>
+                      	</tr>
+                      	</thead>
+                      	<tbody>
+                      		{% for item in total_list %}
+                      		<tr>
+                      			<td>{{ item.year }}</td>
+                      			<td>{{ item.month }}</td>
+                      			<td>{{ item.total_case_count }}</td>
+                      		</tr>
+                      		{% endfor %}
+                      	</tbody>
+                      	</table>

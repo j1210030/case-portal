@@ -1,0 +1,29 @@
+<table border="1" class="complexTbl">
+                      	<thead>
+                      	<tr>
+                      		
+                      		<th style="text-align:left;border-bottom: 2px solid {{ border_color }}">Year/Month</th>
+                            <th style="text-align:left;border-bottom: 2px solid {{ border_color }}">Partner</th>
+                            <th style="text-align:left;border-bottom: 2px solid {{ border_color }}">Case count</th>
+                      	</tr>
+                      	</thead>
+                      	<tbody>
+                      	
+                      		{% for item in total_list %}
+                      			{% for report in item.locale_list %}
+                      			<tr>
+                      				{% if forloop.first %}
+                      				<td rowspan="{{ item.size }}">{{ item.period }}</td>
+                      				{% endif %}
+                      				<td>{{ report.partner }} 
+                      				 {% if report.partner.name_locale %}
+                      				 / {{ report.partner.name_locale }}
+                      				 {% endif %}
+                      				 </td>
+                      				<td>{{ report.case_count }}</td>
+                      			</tr>
+                      			{% endfor %}
+                      		
+                      		{% endfor %}
+                      	</tbody>
+                      	</table>

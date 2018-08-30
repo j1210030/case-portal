@@ -1,0 +1,125 @@
+{% extends 'gcase/common/base.html' %}
+{% load staticfiles %}
+
+{% block js %}
+<script src="{% static 'js/ajax/review_request.js' %}"></script>
+{% endblock %}
+{% block content %}
+<style>
+</style>
+
+            <div class="row">
+              <div class="col-md-9 col-sm-9 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h4>
+                    {% if action == 'add' %}
+                    	 <i class="fa fa-plus"></i> Add Review Request
+                    {% else %}
+                   		<i class="fa fa-edit"></i> Edit Review Request
+                    {% endif %}
+                   
+                    </h4>
+                    
+                    <div class="pull-right">
+                    	<a href="#" onclick="history.go(-1);return false;" class="btn btn-round btn-primary btn-sm"><i class="fa fa-arrow-left"></i> Back</a>
+              		</div>
+                    
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                  		
+                  		{% include 'gcase/common/show_message.html' %}
+                       <form id="reviewRequestForm" class="form-horizontal form-label-left" method="POST">
+						 {% csrf_token %}
+						 
+						 <input type="hidden" name="referer" value="{{ referer }}" />
+						 {% if action == 'edit'  %}
+                        	 
+                        	 <input type="hidden" name="id" value="{{ id }}" readonly />
+                        	 
+                        {% else %}
+                        	{{ form.id }}
+                        {% endif %}		
+						 
+					<div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name_english">gCase Id
+                        </label>
+                        <div class="col-md-3 col-sm-3 col-xs-12">
+                        	<input type="text" class="form-control" value="{{ case }}" disabled='disabled' />
+                        	<input type="hidden" name="case" value="{{ case }}" readonly />
+                        </div>
+                        
+                     </div>
+                     
+                     <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name_english">Email title <span class="required text-danger">*</span>
+                        </label>
+                        <div class="col-md-7 col-sm-7 col-xs-12">
+                        	{{ form.email_title }}		
+                        </div>
+                     </div>
+                      
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name_english">Requested on <span class="required text-danger">*</span>
+                        </label>
+                        <div class="col-md-3 col-sm-3 col-xs-12">
+                        	{{ form.requested_on }}	
+                        </div>
+                      </div>
+                      
+                       <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Agent remarks
+                        </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                        	{{ form.agent_remarks}}		
+                        </div>
+                     </div>
+                     
+                     
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name_english">Feedback received on 
+                        </label>
+                        <div class="col-md-3 col-sm-3 col-xs-12">
+                        	{{ form.feedback_received_on }}	
+                        </div>
+                      </div>
+                      
+                       <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Agent remarks
+                        </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                        	{{ form.da_feedback }}		
+                        </div>
+                     </div>
+                      
+                      
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name_english">Status <span class="required text-danger">*</span>
+                        </label>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                        	{{ form.status }}		
+                        </div>
+                      </div>
+                      
+                     
+                   
+                      <div class="ln_solid"></div>
+                      <div class="form-group">
+                        <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+                          <button type="button" class="btn btn-warning"><i class="fa fa-times"></i> Cancel</button>
+                          <button type="submit" id="requestSubmitBtn" class="btn btn-primary"><i class="fa fa-save"></i> Submit</button>
+                        </div>
+                      </div>
+                      	
+                      		
+                    </form>
+                      
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+
+
+{% endblock %}

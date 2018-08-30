@@ -1,0 +1,51 @@
+{% load i18n %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+{% block style %}
+    <head>
+        <meta charset="utf-8">
+        <title>Case Admin(DPS-TOK)</title>
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        {% include "gcase/common/stylesheet.html" %}
+       
+        {% block stylesheet %}{% endblock %}
+        
+     <script src="{% static 'vendor/jquery/dist/jquery.min.js' %}"></script>
+     <script src="{% static 'vendor/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+      <script src="{% static 'vendor/jquery-validator/jquery.validate.min.js' %}"></script>
+        
+    </head>
+{% endblock %}
+ <body class="nav-md">
+ 
+  {% block js %}{% endblock %}
+   <div class="container body">  
+   	<div class="main_container">
+    	{% block header %}
+        <!-- HEADER -->
+        {% include "gcase/common/header.html" %}
+        <!-- END HEADER -->
+        {% endblock %}
+        
+        {% include "gcase/common/top_navigation.html" %}
+
+        
+        <!-- page content -->
+        <div class="right_col" role="main">
+               {% block content %}{% endblock %}
+        </div>
+        {% block script %}
+        {% endblock %}
+        
+		{% include "gcase/common/footer.html" %}
+	</div>
+</div>
+
+{% include "gcase/common/javascript.html" %}
+
+</body>
+ 
+</html>

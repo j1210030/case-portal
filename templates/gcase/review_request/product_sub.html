@@ -1,0 +1,53 @@
+<div class="table-responsive">
+                <table id="datatable-responsive" class="table table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                      	<thead>
+                        <tr>
+                        
+                          <th>Case Id</th>
+                          <th>Email title</th>
+                          <th>Language</th>
+                          <th>Assignee</th>
+                          <th>Partner</th>
+                          <th>Requested on</th>
+                          <th>Status</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      
+                      <tbody>
+                     {% for review in review_list %}
+                     {% if review.case.product.id == product %} 
+                        <tr>
+                        <td title='{{ review.case.subject }}' class="{{ review.status }}">{{ review.case.id }}</td>
+                        <td class="{{ review.status }}" title="{{ review.email_title }}">{{ review.email_title|truncatechars:45  }}</td>
+                        <td class="{{ review.status }}">{{ review.case.get_language_display }}</td>
+                        
+                        <td class="{{ review.status }}">
+                        	{{ review.case.gcase_user.user.first_name }}
+                        </td>
+                         <td class="{{ review.status }}">
+                        	{{ review.case.partner.name_english }}
+                        </td>
+                        <td class="{{ review.status }}">
+                        	{{ review.requested_on | date:"d.m.Y" }}
+                        </td>
+                        <td class="{{ review.status }}">
+                        	{{ review.status }}
+                        </td>
+                        
+                      
+                      	 <td class="{{ review.status }}">
+                        	{% if review.status == 'Open' %}
+                        	<a href="/review_request/edit?id={{ review.id }}&case={{ review.case.id }}" role="button" class="btn btn-round btn-primary btn-xs">
+                        	<i class="fa fa-pencil"></i>&nbsp;Edit
+                        	</a>
+                        	{% endif %}
+                        </td>
+                        {% endif %}
+                       {% endfor %}
+                      	</tr>
+                      	</tbody>
+                      	</table>
+                      
+                   </div>
+                    

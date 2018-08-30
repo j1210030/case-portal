@@ -1,0 +1,19 @@
+<table border="1" class="complexTbl">
+                      	<thead>
+                      	<tr>
+                      		<th style="text-align:left;border-bottom: 2px solid #ffc04c;">Year</th>
+                            <th style="text-align:left;border-bottom: 2px solid #ffc04c;">Month</th>
+                            <th style="text-align:left;border-bottom: 2px solid #ffc04c;">case reported</th>
+                           
+                      	</tr>
+                      	</thead>
+                      	<tbody>
+                      		{% for item in firebase_list %}
+                      		<tr>
+                      			<td>{{ item.year }}</td>
+                      			<td>{{ item.month }}</td>
+                      			<td>{{ item.total_case_count }}</td>
+                      		</tr>
+                      		{% endfor %}
+                      	</tbody>
+                      	</table>

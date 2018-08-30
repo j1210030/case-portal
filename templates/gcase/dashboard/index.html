@@ -1,0 +1,135 @@
+{% extends 'gcase/common/base.html' %}
+{% load staticfiles %}
+{% block js %}
+
+{% endblock %}
+{% block content %}
+
+
+<div class="">
+            <div class="page-title">
+              <div class="title_left">
+                <h3><i class="fa fa-dashboard"></i> Current Status Board <span style="color:#cc0000">{{ period }}</span></h3>
+              </div>
+            </div>
+            
+           
+            <div class="clearfix"></div>
+
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                
+                 <div class="x_title">
+                    		<h2><small>Overall</small></h2>
+                    		<ul class="nav navbar-right panel_toolbox">
+                     		 	<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      			</li>
+                    		</ul>
+                    		<div class="clearfix"></div>
+                  </div>
+                  
+                  <div class="x_content">
+                  	{% include 'gcase/common/show_message.html' %}
+                  
+                     {% include "gcase/dashboard/overall.html"  %}   
+                      
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="clearfix"></div>
+
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                
+                 <div class="x_title">
+                    		<h2><small>Partner</small></h2>
+                    		<ul class="nav navbar-right panel_toolbox">
+                     		 	<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      			</li>
+                    		</ul>
+                    		<div class="clearfix"></div>
+                  </div>
+                  
+                  <div class="x_content">
+                  	{% include 'gcase/common/show_message.html' %}
+                  
+                     {% include "gcase/dashboard/partner.html"  %}   
+                      
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                
+                 <div class="x_title">
+                    		<h2><small>Current week</small></h2>
+                    		<ul class="nav navbar-right panel_toolbox">
+                     		 	<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      			</li>
+                    		</ul>
+                    		<div class="clearfix"></div>
+                  </div>
+                  
+                  <div class="x_content">
+                  	
+                     {% include "gcase/dashboard/current_week.html"  %}   
+                      
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                
+                 <div class="x_title">
+                    		<h2><small>Individual</small></h2>
+                    		<ul class="nav navbar-right panel_toolbox">
+                     		 	<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      			</li>
+                    		</ul>
+                    		<div class="clearfix"></div>
+                  </div>
+                  
+                  <div class="x_content">
+                  	{% include 'gcase/common/show_message.html' %}
+                  
+                     {% include "gcase/dashboard/individual.html"  %}   
+                      
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!--  chart -->
+            <!--  <div class="clearfix"></div>
+
+            	<div class="row">
+              		<div class="col-md-12 col-sm-12 col-xs-12">
+                	<div class="x_panel">
+            			<div class="x_content">
+                    		<div id="echart_backlog" style="height:350px;"></div>
+                  		</div>
+                  	</div>
+            	
+            	</div>
+          </div> -->
+    </div>
+    
+
+<script>
+
+</script>
+
+{% endblock %}
+
+

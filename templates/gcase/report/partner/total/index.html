@@ -1,0 +1,90 @@
+{% extends 'gcase/common/base.html' %}
+{% load staticfiles %}
+{% block js %}
+<script src="{% static 'js/ajax/partner.js' %}"></script>
+{% endblock %}
+{% block content %}
+
+
+<div class="">
+            <div class="page-title">
+              <div class="title_left">
+                <h3><i class="fa fa-cubes"></i> Partner Case Report </h3>
+                
+              </div>
+            </div>
+            
+            <div class="clearfix"></div>
+            
+  			{% include "gcase/report/partner/filter.html" %} 
+  			
+           <!-- total / Summary -->
+           <div class="clearfix"></div>
+
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                
+                <div class="x_title">
+                    <h2><small>Total Case Count&nbsp; [ <i>Period:( {{ period }} )</i> ]</small> </h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  
+                  <div class="x_content">
+                  
+                     
+                      
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                      		 <div class="table-responsive">
+                      			<table class="table table-bordered">
+                      				<thead>
+                      				<tr>
+                      					<th> <img src="/static/images/flags/jp.png" class="img-rounded" alt="Logo" width="20" height="20">&nbsp;Japan</th>
+                      					<th> <img src="/static/images/flags/ko.png" class="img-rounded" alt="Logo" width="20" height="20">&nbsp;Korea</th>
+                      					<th> <img src="/static/images/flags/zh.png" class="img-rounded" alt="Logo" width="20" height="20">&nbsp;China</th>
+                      					
+                      				</tr>
+                      				</thead>
+                      				
+                      				<tbody>
+                      				
+                      					<tr>
+                      					
+                      						<td>
+                      						
+                      							{% include "gcase/report/partner/total/locale.html" with  lang='jp' %} 
+                      							
+                      						</td>
+                      						
+                      						<td>
+                      							{% include "gcase/report/partner/total/locale.html" with  lang='ko' %} 
+                      						</td>
+                      						
+                      						<td>
+                      							{% include "gcase/report/partner/total/locale.html" with  lang='zh' %} 
+                      						</td>
+                      		
+                      					
+                      					
+                      					</tr>
+                      				
+                      				</tbody>
+                      			</table>
+                      		</div>
+                      		
+                      	
+                      
+              		</div>
+            		</div>
+            	</div>
+            </div>
+            
+     </div>
+     
+    </div>
+     
+   {% endblock %}         

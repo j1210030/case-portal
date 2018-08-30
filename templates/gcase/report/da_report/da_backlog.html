@@ -1,0 +1,88 @@
+<table border="1" class="complexTbl">
+                      	<thead>
+                      	<tr>
+                      		<th>
+                      			Week
+                      		</th>
+                      		<th>
+                      			Product
+                      		</th>
+                      		<th>
+                      			Assigned
+                      		</th>
+                      		<th>
+                      			Needinfo
+                      		</th>
+                      		<th>
+                      			Blocked
+                      		</th>
+                      		<th>
+                      			Review requested
+                      		</th>
+                      		<th>
+                      			Backlog
+                      		</th>
+                      	</tr>
+                      	</thead>
+                      	<tbody>
+                      	{% for week in week_list %}
+                      		<tr>
+                      			<td rowspan="2">{{ week | date:"d.m.y" }}</td>
+                      			<td>
+                      				<img src="/static/images/min/1.png" class="img-rounded" alt="Logo" width="15" height="15">
+                           			<span style="font-size:110%">Android</span>
+                      			</td>
+                      			
+                      			{% for item in bi_weekly_data_list %}
+
+             						{% if item.product_id == 1   and item.week == week %}	
+                        
+                        	
+                            		<td>{{ item.assigned }}</td>
+                            		<td>{{ item.needinfo }}</td>
+                           
+                            		<td>{{ item.blocked }}</td>
+                            		<td>{{ item.review_requested }}</td>
+                            		<td>{{ item.get_backlog }}</td>
+                        
+              						{% endif %}
+					 			{% endfor %}
+					 	  
+                      				
+                      		</tr>
+                      		
+                      			<tr>
+                      			<td>
+                      				 <img src="/static/images/min/2.png" class="img-rounded" alt="Logo" width="15" height="15">
+                            		<span style="font-size:110%">Firebase</span>
+                      			</td>
+                      			
+                      			{% for item in bi_weekly_data_list %}
+
+             						{% if item.product_id == 2   and item.week == week %}	
+                        
+                        	
+                            		<td>{{ item.assigned }}</td>
+                            		<td>{{ item.needinfo }}</td>
+                           
+                            		<td>{{ item.blocked }}</td>
+                            		<td>{{ item.review_requested }}</td>
+                            		<td>{{ item.get_backlog }}</td>
+                        
+              						{% endif %}
+					 			{% endfor %}  
+					 			</tr>
+					 			{% endfor %}
+					 			<tr>
+                      				<td colspan="2" style="text-align:center">
+                      				<strong>Total</strong>
+                      				</td>
+                      				<td>{{ biweekly_total.assigned }}</td>
+                      				<td>{{ biweekly_total.needinfo }}</td>
+                      				<td>{{ biweekly_total.blocked }}</td>
+                      				<td>{{ biweekly_total.review_requested }}</td>
+                      				<td>{{ biweekly_total.total_backlog }}</td>
+                      			</tr>
+
+                      	</tbody>
+</table>

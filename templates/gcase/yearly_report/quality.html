@@ -1,0 +1,82 @@
+          
+                  
+                      <div class="table-responsive">
+                      	
+                      	
+                      	<table class="table table-bordered">
+                      	<thead>
+                      		<tr>
+                      		<th style="text-align:left;border-bottom: 2px solid #0000cc;width:50%;background-color:#87CEFF">
+                      			<span style="font-size:110%">Product</span>
+                      		</th>
+                      		<th style="text-align:left;border-bottom: 2px solid #0000cc;background-color:#87CEFF">
+                      			<span style="font-size:110%">No of cases reviewed </span>
+                      		</th>
+                      		<th style="text-align:left;border-bottom: 2px solid #0000cc;background-color:#87CEFF">
+                      			<span style="font-size:110%">Average weekly OK %</span>
+                      		</th>
+                      		<th style="text-align:left;border-bottom: 2px solid #0000cc;background-color:#87CEFF">
+                      			<span style="font-size:110%">Average monthly OK %</span>
+                      		</th>
+                      		</tr>
+                      	</thead>
+                      	<tbody>
+                      		<tr>
+                      			<td style="text-align:left;border-bottom: 2px solid #9ACD32;">
+                      				<img src="/upload/products/2017/08/android.png" class="img-rounded" alt="Logo" width="25" height="25">
+                      				Android
+                      			</td>
+                      			<td>
+                      				{{ android_quality.total_requested }}
+                      			</td>
+                      			<td>
+                      				{{ android_quality.weekly_ok | floatformat:1  }}&#37;
+                      			</td>
+                      			<td>
+                      				{{ android_quality.monthly_ok |floatformat:1  }}&#37;
+                      			</td>
+                      		</tr>
+                      		<tr>
+                      			
+                      			<td style="text-align:left;border-bottom: 2px solid #ffc04c;">
+                      				<img src="/upload/products/2017/08/firebase.png" class="img-rounded" alt="Logo" width="25" height="25">
+                      				Firebase
+                      			</td>
+                      			<td>
+                      				{{ firebase_quality.total_requested }}
+                      			</td>
+                      			<td>
+                      				{{ firebase_quality.weekly_ok | floatformat:1  }}&#37;
+                      			</td>
+                      			<td>
+                      				{{ firebase_quality.monthly_ok |floatformat:1  }}&#37;
+                      			</td>
+                      		</tr>
+                      	
+                      	</tbody>
+                      </table>
+                      
+                      <table border="1" class="complexTbl">
+                      				<thead>
+                        			<tr class="headings">
+                          				<th>Android (Monthly quality)</th>
+                          				<th>Firebase (Monthly quality)</th>
+                          				
+                        			</tr>
+                      				</thead>
+                      				<tbody>
+                      					<tr>
+                      						<td style="width:50%">
+                      							<div id="echart_monthly_quality_android" style="height:400px;"></div>
+                      						</td>
+                      						<td>
+                      							<div id="echart_monthly_quality_firebase" style="height:400px;"></div>
+                      						</td>
+                      					</tr>
+                      				
+                      				</tbody>
+                      </table>
+                      </div>
+                      
+                      
+                  

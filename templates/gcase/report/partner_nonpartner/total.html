@@ -1,0 +1,29 @@
+
+					<table border="1" class="complexTbl">
+                      		<thead>
+                        	<tr class="headings">
+                          	<th style="width:150px">Week</th>
+                          	<th style="background-color: #B0E2FF;width:130px">Incoming</th>
+                          	<th style="background-color: #B0E2FF;width:130px">Incoming partner</th>
+                          	<th style="background-color: #B0E2FF;width:130px">Avg %age</th>
+                          	<th style="background-color: #ffedcc;width:130px">So</th>
+                          	<th style="background-color: #ffedcc;width:130px">So Partner</th>
+                       		<th style="background-color: #ffedcc;width:130px">Avg %age</th>
+                        	</tr>
+                      		</thead>
+                      	<tbody>
+                     	 {% for item in total_list %}
+                        <tr>
+                        	<td>{{ item.week | date:"d.m.y" }}</td>
+                            <td>{{ item.total_incoming }}</td>
+                            <td>{{ item.total_incoming_partner }}</td>
+                            <td>{{ item.avg_incoming_percent }}</td>
+                            <td>{{ item.total_so }}</td>
+                            <td>{{ item.total_so_partner }}</td>
+                            <td>{{ item.avg_incoming_percent}}</td>
+                          
+                        </tr>
+                       {% endfor %}  
+                       </tbody>
+                       
+                      </table>

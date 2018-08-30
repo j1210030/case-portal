@@ -1,0 +1,167 @@
+{% extends 'gcase/common/base.html' %}
+{% load staticfiles %}
+{% block js %}
+
+{% endblock %}
+{% block content %}
+
+
+<div class="">
+            <div class="page-title">
+              <div class="title_left">
+                <h3><i class="fa fa-cubes"></i> Weekly Partner Non Partner Report </h3>
+              </div>
+            </div>
+            
+            <div class="clearfix"></div>
+
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2><small>Search</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+                    <form class="form-horizontal form-label-left input_mask">
+      			
+                      <div class="col-md-2 col-sm-2 col-xs-12 form-group has-feedback">
+                      			<label>
+                      			From
+                      			</label>
+                          		<select name="from_year" id="from_year" class="form-control">
+                          			<option value="">Year</option>
+                          			{% for year in from_year_options %}
+                          			<option value="{{ year }}" {% if year == from_year %} selected {% endif %}>{{ year }}</option>
+                          			{% endfor %}
+                          		</select>
+                   	</div>
+                   	 <div class="col-md-2 col-sm-2 col-xs-12 form-group has-feedback">
+                   	 			<label>
+                      			
+                      			</label>
+                          		<select name="from_month" id="from_month" class="form-control">
+                          			<option value="">Month</option>
+                          			{% for month in month_options %}
+                          			<option value="{{ month }}" {% if month == from_month %} selected {% endif %} >{{ month }}</option>
+                          			{% endfor %}
+                          		</select>
+                   	</div>
+                   	
+                   	
+                   	<div class="col-md-2 col-sm-2 col-xs-12 form-group has-feedbac">
+                   	</div>
+                  
+                   	<div class="col-md-2 col-sm-2 col-xs-12 form-group has-feedbac">
+                          		<label>To</label>
+                          		<select name="to_year" id="to_year" class="form-control">
+                          			<option value="">Year</option>
+                          			{% for year in to_year_options %}
+                          			<option value="{{ year }}" {% if year == to_year %} selected {% endif %}>{{ year }}</option>
+                          			{% endfor %}
+                          		</select>
+                   	</div>
+                   	 <div class="col-md-2 col-sm-2 col-xs-12 form-group has-feedbac">
+                   	 	<label></label>
+                          		<select name="to_month" id="to_month" class="form-control">
+                          			<option value="">Month</option>
+                          			{% for month in month_options %}
+                          			<option value="{{ month }}" {% if month == to_month %} selected {% endif %}>{{ month }}</option>
+                          			{% endfor %}
+                          		</select>
+                   	</div>
+                   	
+  					<div class="form-group pull-right">
+  						<div class="col-md-12 col-sm-9">
+                         <input type="checkbox" name="csv"  value="1" /> CSV Download &nbsp;&nbsp;
+                          <button type="submit"  class="btn btn-sm btn-rounded btn-primary"> <i class="fa fa-search"></i>&nbsp;Submit</button>
+                        </div>
+                      </div>
+                      
+                    </form>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            
+            <div class="clearfix"></div>
+
+            <div class="row">
+            	
+              	<div class="col-md-12 col-sm-12 col-xs-12">
+                	
+                	<div class="x_panel">
+                	
+                		 <div class="x_title">
+                    		<h2><small>Total</small></h2>
+                    		<ul class="nav navbar-right panel_toolbox">
+                     		 	<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      			</li>
+                    		</ul>
+                    		<div class="clearfix"></div>
+                  		</div>
+                  
+            			<div class="x_content">
+                    		<div class="table-responsive">
+                    		{% include "gcase/report/partner_nonpartner/total.html"  %} 
+                    		</div>
+               
+                    		<div class="table-responsive">
+                    		<table border="1" class="complexTbl">
+                      			<thead>
+                      				<tr>
+                      					<th style="text-align:left;border-bottom: 2px solid #0000cc;">
+                      						<span style="font-size:110%">Incoming Graph</span>
+                      					</th>
+                      					<th style="text-align:left;border-bottom: 2px solid #cc0000;">
+                      			  			<span style="font-size:110%">So Graph</span>
+                      					</th>
+                      				</tr>
+                      			</thead>
+                      			<tbody>
+                      			
+                      				<tr>
+                      					<td style="width:50%">
+                      						<div id="echart_incoming_total" style="height:350px;"></div>
+                      					</td>
+                      					<td style="width:50%">
+                      						<div id="echart_so_total" style="height:350px;"></div>
+                      					</td>
+                      					
+                      				</tr>
+                      			
+                      			</tbody>
+                      		</table>
+                  			</div>
+                  	</div>
+            	
+            	</div>
+          </div>
+          
+            
+         </div>  
+         
+          <div class="clearfix"></div>
+            <div class="row">
+         		{% include "gcase/report/partner_nonpartner/android.html"  %} 
+         	</div>
+         
+         <div class="clearfix"></div>
+            <div class="row">
+         		{% include "gcase/report/partner_nonpartner/firebase.html"  %} 
+         	</div>	
+            
+    </div>
+     
+     
+ 
+	
+{% endblock %}         
+          

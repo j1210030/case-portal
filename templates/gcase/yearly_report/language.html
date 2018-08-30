@@ -1,0 +1,171 @@
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  
+                  
+                  <div class="x_title">
+                    		<h2><small>Language Inflow</small></h2>
+                    		<ul class="nav navbar-right panel_toolbox">
+                     		 	<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      			</li>
+                    		</ul>
+                    		<div class="clearfix"></div>
+                  </div>
+                  
+                  <div class="x_content">
+                  
+                      <div class="table-responsive">
+                      	
+                      	
+                      	<table class="table table-bordered">
+                      	<thead>
+                      		<tr>
+                      		<th style="text-align:left;border-bottom: 2px solid #0000cc;width:50%;background-color:#87CEFF">
+                      			<span style="font-size:110%">Android</span>
+                      		</th>
+                      		<th style="text-align:left;border-bottom: 2px solid #0000cc;background-color:#87CEFF">
+                      			<span style="font-size:110%">Firebase</span>
+                      		</th>
+                      		</tr>
+                      	</thead>
+                      	<tbody>
+                      	<tr>
+                      		<td>
+                      		
+                      			<table border="1" class="complexTbl">
+                      				<thead>
+                        			<tr class="headings">
+                          				<th>Language</th>
+                          				<th>Partner</th>
+                          				<th>Non partner</th>
+                          				<th>Total</th>
+                          				<th>%</th>
+                        			</tr>
+                      				</thead>
+                      				<tbody>
+                      				
+                      					
+                      					<tr>
+                      						<td>Japanese</td>
+                      						{% for android in android_language_list %}
+                      						
+                      							{% if android.language == 'jp'  %}
+                      								<td>{{ android.incoming_partner }}</td>
+                      								<td>{{ android.incoming_nonpartner }}</td>
+                      								<td>{{ android.total }}</td>
+                      								<td>{{ android.percent }} &#37;</td>
+                      							{% endif %}
+                      						{% endfor %}	
+                      					</tr>
+                      					
+                      					<tr>
+                      						<td>Korean</td>
+                      						{% for android in android_language_list %}
+                      						
+                      							{% if android.language == 'ko'  %}
+                      								<td>{{ android.incoming_partner }}</td>
+                      								<td>{{ android.incoming_nonpartner }}</td>
+                      								<td>{{ android.total }}</td>
+                      								<td>{{ android.percent }} &#37;</td>
+                      							{% endif %}
+                      						{% endfor %}	
+                      					</tr>
+                      					
+                      					<tr>
+                      						<td>Chinese</td>
+                      						{% for android in android_language_list %}
+                      						
+                      							{% if android.language == 'zh'  %}
+                      								<td>{{ android.incoming_partner }}</td>
+                      								<td>{{ android.incoming_nonpartner }}</td>
+                      								<td>{{ android.total }}</td>
+                      								<td>{{ android.percent }} &#37;</td>
+                      							{% endif %}
+                      						{% endfor %}	
+                      					</tr>
+                      					
+                      				</tbody>
+                      			</table>
+                      			
+                      		</td>
+                      		
+                      		<td>
+                      		
+                      		<table border="1" class="complexTbl">
+                      				<thead>
+                        			<tr class="headings">
+                          				<th>Language</th>
+                          				<th>Partner</th>
+                          				<th>Non partner</th>
+                          				<th>Total</th>
+                          				<th>%</th>
+                        			</tr>
+                      				</thead>
+                      				<tbody>
+                      				
+                      					
+                      					<tr>
+                      						<td>Japanese</td>
+                      						{% for firebase in firebase_language_list %}
+                      						
+                      							{% if firebase.language == 'jp'  %}
+                      								<td>{{ firebase.incoming_partner }}</td>
+                      								<td>{{ firebase.incoming_nonpartner }}</td>
+                      								<td>{{ firebase.total }}</td>
+                      								<td>{{ firebase.percent }} &#37;</td>
+                      							{% endif %}
+                      						{% endfor %}	
+                      					</tr>
+                      					
+                      					<tr>
+                      						<td>Korean</td>
+                      						{% for firebase in firebase_language_list %}
+                      						
+                      							{% if firebase.language == 'ko'  %}
+                      								<td>{{ firebase.incoming_partner }}</td>
+                      								<td>{{ firebase.incoming_nonpartner }}</td>
+                      								<td>{{ firebase.total }}</td>
+                      								<td>{{ firebase.percent }} &#37;</td>
+                      							{% endif %}
+                      						{% endfor %}	
+                      					</tr>
+                      					
+                      					<tr>
+                      						<td>Chinese</td>
+                      						{% for firebase in firebase_language_list %}
+                      						
+                      							{% if firebase.language == 'zh'  %}
+                      								<td>{{ firebase.incoming_partner }}</td>
+                      								<td>{{ firebase.incoming_nonpartner }}</td>
+                      								<td>{{ firebase.total }}</td>
+                      								<td>{{ firebase.percent }} &#37;</td>
+                      							{% endif %}
+                      						{% endfor %}	
+                      					</tr>
+                      					
+                      				</tbody>
+                      			</table>
+                      		
+                      		</td>                      		
+             
+                      		
+                      	</tr>
+                      	<tr>
+                      	
+                      		<td>
+                      			<div id="echart_android_inflow" style="height:350px;"></div>
+                      		</td>
+                      		<td>
+                      			<div id="echart_firebase_inflow" style="height:350px;"></div>
+                      		</td>
+                      	</tr>
+                      </tbody>
+                      </table>
+                      </div>
+                      
+                      
+                  </div>
+                </div>
+              </div>
+            </div>
+ 

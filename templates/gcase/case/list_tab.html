@@ -1,0 +1,295 @@
+{% extends 'gcase/common/base.html' %}
+{% load staticfiles %}
+{% block js %}
+<script src="{% static 'js/ajax/case.js' %}"></script>
+<script src="{% static 'js/ajax/case_search.js' %}"></script>
+{% endblock %}
+{% block content %}
+
+
+<div class="">
+            <div class="page-title">
+              <div class="title_left">
+                <h3><i class="fa fa-cube"></i> Case Records </h3>
+                
+              </div>
+
+              <div class="pull-right">
+                    <a href="/case/add" class="btn btn-round btn-primary btn-sm"><i class="fa fa-plus"></i> Add new</a>
+              </div>
+            </div>
+            
+            <div class="clearfix"></div>
+
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2><small>Search</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+                    <form class="form-horizontal form-label-left input_mask">
+      
+                      <div class="col-md-2 col-sm-2 col-xs-12 form-group has-feedback">
+                          		<select name="from_year" id="from_year" class="form-control">
+                          			<option value="">Year</option>
+                          			{% for year in from_year_options %}
+                          			<option value="{{ year }}" {% if year == from_year %} selected {% endif %}>{{ year }}</option>
+                          			{% endfor %}
+                          		</select>
+                   	</div>
+                   	 <div class="col-md-2 col-sm-2 col-xs-12 form-group has-feedback">
+                          		<select name="from_month" id="from_month" class="form-control">
+                          			<option value="">Month</option>
+                          			{% for month in month_options %}
+                          			<option value="{{ month }}" {% if month == from_month %} selected {% endif %} >{{ month }}</option>
+                          			{% endfor %}
+                          		</select>
+                   	</div>
+                   	
+                   	
+                   	<div class="col-md-2 col-sm-2 col-xs-12 form-group has-feedbac">
+                   	
+                   	</div>
+                  
+                   	<div class="col-md-2 col-sm-2 col-xs-12 form-group has-feedbac">
+                          		<select name="to_year" id="to_year" class="form-control">
+                          			<option value="">Year</option>
+                          			{% for year in to_year_options %}
+                          			<option value="{{ year }}" {% if year == to_year %} selected {% endif %}>{{ year }}</option>
+                          			{% endfor %}
+                          		</select>
+                   	</div>
+                   	 <div class="col-md-2 col-sm-2 col-xs-12 form-group has-feedbac">
+                          		<select name="to_month" id="to_month" class="form-control">
+                          			<option value="">Month</option>
+                          			{% for month in month_options %}
+                          			<option value="{{ month }}" {% if month == to_month %} selected {% endif %}>{{ month }}</option>
+                          			{% endfor %}
+                          		</select>
+                   	</div>
+                   	
+                   	
+                      
+                      <div class="col-md-3 col-sm-3 col-xs-12 form-group has-feedback">
+                       	<select name="product" id="product" class="form-control">
+                      	<option value="">Product</option>
+                      	{% for product in product_list %}
+                      	<option value="{{ product.id }}" {% if cond.product == product.id|slugify %} selected {% endif %}>{{ product.name }}</option> 
+                      	{% endfor %}
+                      	</select>
+                      </div>
+                      
+                      <div class="col-md-3 col-sm-3 col-xs-12 form-group has-feedback">
+                       	<select name="component" id="component" class="form-control">
+                      	<option value="">Component</option>
+                      	
+                      	</select>
+                      </div>
+                      
+                       <div class="col-md-3 col-sm-3 col-xs-12 form-group has-feedback">
+                       	<select name="language" id="language" class="form-control">
+                      	<option value="">Language</option>
+                      	{% for key, value in language_choices.items %}
+                            	<option value="{{ key }}" {% if key == cond.language %} selected {% endif %} >{{ value }}</option> 
+                              	
+                        {% endfor %}
+                      </select>
+                      </div>
+                      
+                      
+                    <div class="col-md-3 col-sm-3 col-xs-12 form-group">
+                        <input class="form-control" id="cid" name="cid" placeholder="Case Id" type="text" value="{{ cond.cid }}">
+  					</div>
+  					
+  					
+  					  <div class="col-md-3 col-sm-3 col-xs-12 form-group has-feedback">
+                       	<select name="status" id="status" class="form-control">
+                      	<option value="">Status</option>
+                      	{% for key, value in status_choices.items %}
+                      	<option value="{{ key }}" {% if key == cond.status %} selected {% endif %}>{{ value }}</option> 
+                      	{% endfor %}
+                      	</select>
+                      </div>
+                    
+                      <div class="col-md-3 col-sm-3 col-xs-12">
+                          		<select name="assignee" id="assignee" class="form-control">
+                          			<option value="">Assignee</option>
+                          			{% for assignee in assignee_list %}
+                          			<option value="{{ assignee.id }}" {% if assignee.id|slugify == cond.assignee %} selected {% endif %}>{{ assignee.name }}</option>
+                          			{% endfor %}
+                          		</select>
+                       		 </div>
+					
+					<div class="col-md-3 col-sm-3 col-xs-12">
+						<select name="display" id="display" class="form-control">
+                          	<option value="">Case type</option>
+                          	<option value="p">Partner only</option>
+                          	<option value="np">Non partner only</option>
+                         </select>
+					</div>
+					
+					<div class="col-md-3 col-sm-3 col-xs-12 form-group">
+                        <input class="form-control" id="keyword" name="keyword" placeholder="Keyword( Free text)" type="text">
+  					</div>
+  					
+  					
+  					
+  					<div class="form-group pull-right">
+  						<div class="col-md-12 col-sm-9">
+  							<input type="checkbox" name="so"  value="1" {% if cond.so == '1' %} checked='checked' {% endif %}/> Display SO data &nbsp;&nbsp;
+                         	<input type="checkbox" name="csv"  value="1" /> CSV Download &nbsp;&nbsp;
+                          <button type="submit"  class="btn btn-sm btn-rounded btn-primary"> <i class="fa fa-search"></i>&nbsp;Submit</button>
+                        </div>
+                      </div>
+                      
+                    </form>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            
+            
+            
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  
+                  <div class="x_content">
+                  	{% include 'gcase/common/show_message.html' %}
+                      {% if case_list %}
+                      
+                      
+                      <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                      	
+                      	<ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                      	
+                        <li role="presentation" class="active">
+                        	
+                        	<a href="#tab_assigned" id="assigned-tab" role="tab" data-toggle="tab" aria-expanded="true">
+                        		Assigned
+                        		<span class="label label-primary">{{ count_info.assigned }}</span>
+                        	</a>
+                        </li>
+                        <li role="presentation" class="">
+                        	
+                        	<a href="#tab_needinfo" role="tab" id="needinfo-tab" data-toggle="tab" aria-expanded="false">
+                        	 Need Info
+                        	 <span class="label label-primary">{{ count_info.needinfo }}</span>
+                        	</a>
+                        </li>
+                        
+                        <li role="presentation" class="">
+                        	
+                        	<a href="#tab_review_requested" role="tab" id="review_requested-tab" data-toggle="tab" aria-expanded="false">
+                        	 DA Review 
+                        	 <span class="label label-primary">{{ count_info.review_requested }}</span>
+                        	</a>
+                        </li>
+                        
+                        
+                         <li role="presentation" class="">
+                        	
+                        	<a href="#tab_routed" role="tab" id="routed-tab" data-toggle="tab" aria-expanded="false">
+                        	Routed
+                        	 <span class="label label-primary">{{ count_info.routed }}</span>
+                        	</a>
+                        </li>
+                         <li role="presentation" class="">
+                        	
+                        	<a href="#tab_forwarded" role="tab" id="forwarded-tab" data-toggle="tab" aria-expanded="false">
+                        	 Forwarded
+                        	 <span class="label label-primary">{{ count_info.forwarded }}</span>
+                        	</a>
+                        </li>
+                        
+                        <li role="presentation" class="">
+                        	
+                        	<a href="#tab_consult" role="tab" id="blocked-tab" data-toggle="tab" aria-expanded="false">
+                        	 Consult
+                        	 <span class="label label-primary">{{ count_info.inconsult }}</span>
+                        	</a>
+                        </li>
+                        
+                        <li role="presentation" class="">
+                        	
+                        	<a href="#tab_blocked" role="tab" id="blocked-tab" data-toggle="tab" aria-expanded="false">
+                        	 Blocked
+                        	 <span class="label label-primary">{{ count_info.blocked }}</span>
+                        	</a>
+                        </li>
+                        
+                        {% if cond.so == '1' %}
+                         <li role="presentation" class="">
+                        	
+                        	<a href="#tab_solution_offered" role="tab" id="solution_offered-tab" data-toggle="tab" aria-expanded="false">
+                        	 Solution Offered 
+                        	 <span class="label label-primary">{{ count_info.solution_offered }}</span>
+                        	</a>
+                        </li>
+                        
+                        {% endif %}
+                        
+                      </ul>
+                      
+                       <div id="myTabContent" class="tab-content">
+                       
+                        	<div role="tabpanel" class="tab-pane fade active in" id="tab_assigned" aria-labelledby="home-tab">
+                        		{% include "gcase/case/list_sub.html" with status='assigned' %}  
+                        	</div>
+                        	
+                        	<div role="tabpanel" class="tab-pane fade" id="tab_needinfo" aria-labelledby="home-tab">
+                        		{% include "gcase/case/list_sub.html" with status='needinfo' %}  
+                        	</div>
+                        	
+                        	<div role="tabpanel" class="tab-pane fade" id="tab_review_requested" aria-labelledby="home-tab">
+                        		{% include "gcase/case/list_sub.html" with status='review_requested' %}  
+                        	</div>
+                        	
+                        	<div role="tabpanel" class="tab-pane fade" id="tab_consult" aria-labelledby="home-tab">
+                        		{% include "gcase/case/list_sub.html" with status='inconsult' %}  
+                        	</div>
+                        	
+                        	<div role="tabpanel" class="tab-pane fade" id="tab_blocked" aria-labelledby="home-tab">
+                        		{% include "gcase/case/list_sub.html" with status='blocked' %}  
+                        	</div>
+                        	
+                        	<div role="tabpanel" class="tab-pane fade" id="tab_routed" aria-labelledby="home-tab">
+                        		{% include "gcase/case/list_sub.html" with status='routed' %}  
+                        	</div>
+                        	
+                        	<div role="tabpanel" class="tab-pane fade" id="tab_forwarded" aria-labelledby="home-tab">
+                        		{% include "gcase/case/list_sub.html" with status='forwarded' %}  
+                        	</div>
+                        	{% if cond.so == '1' %}
+                        	<div role="tabpanel" class="tab-pane fade" id="tab_solution_offered" aria-labelledby="home-tab">
+                        		{% include "gcase/case/list_sub.html" with status='solution_offered' %}  
+                        	</div>
+                        	{% endif %}
+                        	
+                       	</div>
+                  	</div>
+                      	
+                      
+                      
+                      {% endif %}
+                      
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+{% endblock %}

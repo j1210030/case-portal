@@ -1,0 +1,321 @@
+{% extends 'gcase/common/base.html' %}
+{% load staticfiles %}
+{% block js %}
+<script src="{% static 'js/ajax/individual.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+
+
+<div class="">
+            <div class="page-title">
+              <div class="title_left">
+                <h3><i class="fa fa-cubes"></i> Individual Report by Member &nbsp;
+                {% if user %}
+                <small><span style="color:#cc0000">{{ period }}</span></small>
+                {% endif %} 
+                 
+                 </h3>
+                
+              </div>
+            </div>
+            
+            <div class="clearfix"></div>
+
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2><small>Search</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+                    <form class="form-horizontal form-label-left input_mask">
+      			
+                      <div class="col-md-2 col-sm-2 col-xs-12 form-group has-feedback">
+                      			<label>
+                      			From
+                      			</label>
+                          		<select name="from_year" id="from_year" class="form-control">
+                          			<option value="">Year</option>
+                          			{% for year in from_year_options %}
+                          			<option value="{{ year }}" {% if year == from_year %} selected {% endif %}>{{ year }}</option>
+                          			{% endfor %}
+                          		</select>
+                   	</div>
+                   	 <div class="col-md-2 col-sm-2 col-xs-12 form-group has-feedback">
+                   	 			<label style="color:white;">
+                      			month
+                      			</label>
+                          		<select name="from_month" id="from_month" class="form-control">
+                          			<option value="">Month</option>
+                          			{% for month in month_options %}
+                          			<option value="{{ month }}" {% if month == from_month %} selected {% endif %} >{{ month }}</option>
+                          			{% endfor %}
+                          		</select>
+                   	</div>
+                   	
+                   	
+                   	<div class="col-md-1 col-sm-1 col-xs-12 form-group has-feedbac">
+                   	</div>
+                  
+                   	<div class="col-md-2 col-sm-2 col-xs-12 form-group has-feedbac">
+                          		<label>To</label>
+                          		<select name="to_year" id="to_year" class="form-control">
+                          			<option value="">Year</option>
+                          			{% for year in to_year_options %}
+                          			<option value="{{ year }}" {% if year == to_year %} selected {% endif %}>{{ year }}</option>
+                          			{% endfor %}
+                          		</select>
+                   	</div>
+                   	 <div class="col-md-2 col-sm-2 col-xs-12 form-group has-feedbac">
+                   	 	<label style="color:white;">
+                      			month
+                      			</label>
+                          		<select name="to_month" id="to_month" class="form-control">
+                          			<option value="">Month</option>
+                          			{% for month in month_options %}
+                          			<option value="{{ month }}" {% if month == to_month %} selected {% endif %}>{{ month }}</option>
+                          			{% endfor %}
+                          		</select>
+                   	</div>
+                   	
+                   	<div class="col-md-2 col-sm-2 col-xs-12 form-group has-feedbac">
+                   	 	
+                   	 	<label>Member</label>
+                          		<select name="uid" id="uid" class="form-control">
+                          			<option value="">Select</option>
+                          			{% for user in user_list %}
+                          			<option value="{{ user.id }}" {% if user.id == uid %} selected {% endif %}>{{ user }}</option>
+                          			{% endfor %}
+                          		</select>
+                   	</div>
+                   	
+  					<div class="form-group pull-right">
+  						<div class="col-md-12 col-sm-9">
+                        
+                          <button type="submit"  class="btn btn-sm btn-rounded btn-primary"> <i class="fa fa-search"></i>&nbsp;Submit</button>
+                        </div>
+                      </div>
+                      
+                    </form>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+              <div class="clearfix"></div>
+				{% if report_list %}
+            	<div class="row">
+              	<div class="col-md-12 col-sm-12 col-xs-12">
+                	<div class="x_panel">
+                	
+                		 <div class="x_title">
+                    	<h2><small>Incoming/SO/Backlog</small>
+                    	<small><span style="color:#cc0000"><i>{{ user }}</i> </span></small>
+                    	</h2>
+                    	<ul class="nav navbar-right panel_toolbox">
+                     	 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  
+            			<div class="x_content">
+                    	<table border="1" class="complexTbl">
+                          <thead>
+                          <tr class="headings">
+                            <th style="text-align:left;border-bottom: 2px solid #0000cc;">Week</th>
+                            <th style="text-align:left;border-bottom: 2px solid #0000cc;">Backlog</th>
+                            <th style="text-align:left;border-bottom: 2px solid #0000cc;">Incoming</th>
+                            <th style="text-align:left;border-bottom: 2px solid #0000cc;">Incoming Partner</th>
+                            <th style="text-align:left;border-bottom: 2px solid #0000cc;">SO</th>
+                            <th style="text-align:left;border-bottom: 2px solid #0000cc;">SO Partner</th>
+                          </tr>
+                          </thead>
+                        <tbody>
+                        	  {% for item in report_list %}
+                        	  	<tr>
+                        	  		<td> {{ item.week | date:"d.m.y" }}</td>
+                        	  		<td> {{ item.pw_backlog }}</td>
+                        	  		<td> {{ item.incoming }}</td>
+                        	  		<td> {{ item.incoming_partner }}</td>
+                        	  		<td> {{ item.so }}</td>
+                        	  		<td> {{ item.so_partner }}</td>
+                        	  {% endfor %}
+                        </tbody>
+                        </table>
+                        
+                  		</div>
+                  	</div>
+            	
+            	</div>
+    </div>
+    
+    
+     <div class="clearfix"></div>
+
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  
+                  <div class="x_content">
+                  	<table border="1" class="complexTbl">
+                         
+                          <tr class="headings">
+                          	<th style="background-color:#EAEAEA">Incoming / Backlog</th>
+                          </tr>
+                          
+                          	<tr>
+                     	  		<td>
+                     	  			<div id="echart_individual_incoming_backlog" style="height:350px;"></div>
+                     	  		</td>
+                     	  	</tr>
+                          
+                          <tr>
+                          	<th style="background-color:#EAEAEA">So</th>
+                          </tr>
+                        
+                     	  	<tr>
+                     	  		<td>
+                     	  		<div id="echart_individual_so" style="height:350px;"></div>
+                     	  		</td>
+                     	  	</tr>
+
+                    </table>
+                  </div>
+                 </div>
+                </div>
+   {% endif %} 
+</div>
+
+<script>
+
+$(document).ready(function() {
+	
+	var weekArr = [];
+	var incomingArr = [];
+	var incomingPartnerArr = [];
+	var backlogArr = [];
+	var soArr = [];
+	var soPartnerArr = [];
+	
+	{% for item in report_list reversed %}
+	
+	 weekArr.push(' {{ item.week | date:"d.m" }}');
+	 incomingArr.push('{{ item.incoming }}');
+	 incomingPartnerArr.push('{{ item.incoming_partner }}');
+	 backlogArr.push('{{ item.pw_backlog }}')
+	 
+	 soArr.push('{{ item.so }}');
+	 soPartnerArr.push('{{ item.so_partner }}');
+	 
+	 
+	{% endfor %}
+	
+	 var optionIncomingBacklog = {
+			    tooltip: {
+			        trigger: 'axis',
+			        axisPointer: {
+			            type: 'cross',
+			            crossStyle: {
+			                color: '#999'
+			            }
+			        }
+			    },
+			    toolbox: {
+			        feature: {
+			            dataView: {show: false, readOnly: false, title:"Data View"},
+			            magicType: {show:true, type: ['line', 'bar'],title:'Magic Type'},
+			            restore: {show: true,title: "Restore"},
+			            saveAsImage: {show: true,title: "Save Image"}
+			        }
+			    },
+			    legend: {
+			        data:['Incoming','Partner','Backlog']
+			    },
+			    xAxis: [
+			        {
+			            type: 'category',
+			            data: weekArr,
+			            axisPointer: {
+			                type: 'shadow'
+			            }
+			        }
+			    ],
+			    yAxis: [
+			        {
+			            type: 'value',
+			            name: 'Backlog',
+			            min: 0,
+			            //max: 5,
+			            //interval: 10,
+			            axisLabel: {
+			                formatter: '{value}'
+			            }
+			        }
+			    ],
+			    series: [
+			        {
+			            name:'Incoming',
+			            type:'bar',
+			            label: {
+			                normal: {
+			                    show: true,
+			                    position: 'top'
+			                }
+			            },
+			            data:incomingArr
+			        },
+			        {
+			            name:'Partner',
+			            type:'bar',
+			            label: {
+			                normal: {
+			                    show: true,
+			                    position: 'top'
+			                }
+			            },
+			            data:incomingPartnerArr
+			        },
+			        {
+			            name:'Backlog',
+			            type:'line',
+			            label: {
+			                normal: {
+			                    show: true,
+			                    position: 'top',
+			                }
+			            },
+			            lineStyle: {
+			                normal: {
+			                    width: 3,
+			                    shadowColor: 'rgba(0,0,0,0.4)',
+			                    shadowBlur: 10,
+			                    shadowOffsetY: 10
+			                }
+			            },
+			            yAxisIndex: 0,
+			            data:backlogArr
+			        }
+			    ]
+	};
+	 
+	
+	 
+	var incomingBacklogChart = echarts.init(document.getElementById('echart_individual_incoming_backlog'));
+	incomingBacklogChart.setOption(optionIncomingBacklog);
+	
+	soElm = document.getElementById('echart_individual_so');
+  	so_chart(soElm, weekArr,soArr, soPartnerArr);
+	
+});
+
+</script>
+{% endblock %}

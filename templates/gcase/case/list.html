@@ -1,0 +1,267 @@
+{% extends 'gcase/common/base.html' %}
+{% load staticfiles %}
+{% block js %}
+<script src="{% static 'js/ajax/case.js' %}"></script>
+<script src="{% static 'js/ajax/case_search.js' %}"></script>
+{% endblock %}
+{% block content %}
+
+
+<div class="">
+            <div class="page-title">
+              <div class="title_left">
+                <h3><i class="fa fa-cube"></i> Case Records </h3>
+                
+              </div>
+
+              <div class="pull-right">
+                    <a href="/case/add" class="btn btn-round btn-primary btn-sm"><i class="fa fa-plus"></i> Add new</a>
+              </div>
+            </div>
+            
+            
+            
+            
+            <div class="clearfix"></div>
+
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2><small>Search</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+                    <form class="form-horizontal form-label-left input_mask">
+      
+                      <div class="col-md-2 col-sm-2 col-xs-12 form-group has-feedback">
+                          		<select name="from_year" id="from_year" class="form-control">
+                          			<option value="">Year</option>
+                          			{% for year in from_year_options %}
+                          			<option value="{{ year }}" {% if year == from_year %} selected {% endif %}>{{ year }}</option>
+                          			{% endfor %}
+                          		</select>
+                   	</div>
+                   	 <div class="col-md-2 col-sm-2 col-xs-12 form-group has-feedback">
+                          		<select name="from_month" id="from_month" class="form-control">
+                          			<option value="">Month</option>
+                          			{% for month in month_options %}
+                          			<option value="{{ month }}" {% if month == from_month %} selected {% endif %} >{{ month }}</option>
+                          			{% endfor %}
+                          		</select>
+                   	</div>
+                   	
+                   	
+                   	<div class="col-md-2 col-sm-2 col-xs-12 form-group has-feedbac">
+                   	
+                   	</div>
+                  
+                   	<div class="col-md-2 col-sm-2 col-xs-12 form-group has-feedbac">
+                          		<select name="to_year" id="to_year" class="form-control">
+                          			<option value="">Year</option>
+                          			{% for year in to_year_options %}
+                          			<option value="{{ year }}" {% if year == to_year %} selected {% endif %}>{{ year }}</option>
+                          			{% endfor %}
+                          		</select>
+                   	</div>
+                   	 <div class="col-md-2 col-sm-2 col-xs-12 form-group has-feedbac">
+                          		<select name="to_month" id="to_month" class="form-control">
+                          			<option value="">Month</option>
+                          			{% for month in month_options %}
+                          			<option value="{{ month }}" {% if month == to_month %} selected {% endif %}>{{ month }}</option>
+                          			{% endfor %}
+                          		</select>
+                   	</div>
+                   	
+                   	
+                      
+                      <div class="col-md-3 col-sm-3 col-xs-12 form-group has-feedback">
+                       	<select name="product" id="product" class="form-control">
+                      	<option value="">Product</option>
+                      	{% for product in product_list %}
+                      	<option value="{{ product.id }}" {% if cond.product == product.id %} selected {% endif %}>{{ product.name }}</option> 
+                      	{% endfor %}
+                      	</select>
+                      </div>
+                      
+                      <div class="col-md-3 col-sm-3 col-xs-12 form-group has-feedback">
+                       	<select name="component" id="component" class="form-control">
+                      	<option value="">Component</option>
+                      	
+                      	</select>
+                      </div>
+                      
+                       <div class="col-md-3 col-sm-3 col-xs-12 form-group has-feedback">
+                       	<select name="language" id="language" class="form-control">
+                      	<option value="">Language</option>
+                      	{% for key, value in language_choices.items %}
+                            	<option value="{{ key }}" {% if key == cond.language %} selected {% endif %} >{{ value }}</option> 
+                              	
+                        {% endfor %}
+                      </select>
+                      </div>
+                      
+                      
+                    <div class="col-md-3 col-sm-3 col-xs-12 form-group">
+                        <input class="form-control" id="cid" name="cid"placeholder="Case Id" type="text">
+  					</div>
+  					
+  					
+  					  <div class="col-md-3 col-sm-3 col-xs-12 form-group has-feedback">
+                       	<select name="status" id="status" class="form-control">
+                      	<option value="">Status</option>
+                      	{% for key, value in status_choices.items %}
+                      	<option value="{{ key }}" {% if key == cond.status %} selected {% endif %}>{{ value }}</option> 
+                      	{% endfor %}
+                      	</select>
+                      </div>
+                      
+                      <div class="col-md-3 col-sm-3 col-xs-12">
+                          		<select name="assignee" id="assignee" class="form-control">
+                          			<option value="">Assignee</option>
+                          			{% for assignee in assignee_list %}
+                          			<option value="{{ assignee.id }}" {% if assignee.id == cond.assignee %} selected {% endif %}>{{ assignee.name }}</option>
+                          			{% endfor %}
+                          		</select>
+                       		 </div>
+					
+					<div class="col-md-3 col-sm-3 col-xs-12">
+						<select name="display" id="display" class="form-control">
+                          	<option value="">Case type</option>
+                          	<option value="p">Partner only</option>
+                          	<option value="np">Non partner only</option>
+                         </select>
+					</div>
+					
+					<div class="col-md-3 col-sm-3 col-xs-12 form-group">
+                        <input class="form-control" id="keyword" name="keyword" placeholder="Keyword( Free text)" type="text">
+  					</div>
+  					
+  					
+  					
+  					<div class="form-group pull-right">
+  						<div class="col-md-12 col-sm-9">
+                         <input type="checkbox" name="csv"  value="1" /> CSV Download &nbsp;&nbsp;
+                          <button type="submit"  class="btn btn-sm btn-rounded btn-primary"> <i class="fa fa-search"></i>&nbsp;Submit</button>
+                        </div>
+                      </div>
+                      
+                    </form>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            
+            
+            
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  
+                  <div class="x_content">
+                  	{% include 'gcase/common/show_message.html' %}
+                      {% if case_list %}
+                      <table id="datatable-responsive" class="table table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                      <thead>
+                        <tr>
+                        
+                          <th>Id</th>
+                          <th>Language</th>
+                          <th>Product</th>
+                          <th>Component</th>
+                          <th>Assignee</th>
+                          <th>Incoming date</th>
+                          <th>Status</th>
+                          <th>Partner</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                     	 {% for case in case_list %}
+                        <tr>
+                        <td title='{{ case.subject }}' class='{{ case.status}}'>
+                        <a href="/case/edit?id={{ case.id }}&language={{ case.language }}">{{ case.id }}</a>
+                        </td>
+                        <td class='{{ case.status}}'>{{ case.get_language_display }}</td>
+                        <td class='{{ case.status}}'>
+                        	
+                        	<img src="{{ MEDIA_URL }}{{ case.product.logo_file }}" class="img-rounded" alt="Logo" width="25" height="25"> 
+                        	
+                        	<span style="">
+                        		{{ case.sub_product | title }}
+                        	</span>
+                        </td>
+                        <td class='{{ case.status}}'>
+                        {{ case.component.name | default_if_none:"" }}
+                        </td>
+                        <td class='{{ case.status}}'>
+                        	{{ case.gcase_user.user.first_name }} 
+                        </td>
+                        
+                        <td class='{{ case.status}}'>{{ case.incoming_date | date:"d.m.Y H:i" }}</td>
+                        
+                        
+                        {% if case.status == 'blocked' and case.buganizer_number %}
+                        
+                        <td class='{{ case.status}}'>
+                        	<a href="https://buganizer.corp.google.com/issues/{{ case.buganizer_number }}">b/{{ case.buganizer_number }}</a>
+                        </td>
+                        {% else %}
+                        <td class='{{ case.status}}' {% if case.status == 'solution_offered' %} title='So date:{{ case.so_date | date:"d.m.Y" }}' {% endif %}>
+                        	{{ case.get_status_display }}
+                        </td>
+                        {% endif %}
+                        
+                        <td class='{{ case.status}}'>
+                       
+                        {% if case.partner %}
+                        	
+                        	<select name="partner" id="partner-{{ case.id }}" class="form-control" onChange="setPartner2Case(this,'{{ case.id }}','{{ case.language }}');">
+                      			<option value="">Select partner</option>
+                      			{% for partner in partner_list %}
+                      				{% if case.language == partner.geo_location %}
+                      				<option value="{{ partner.id }}" {% if case.partner.id == partner.id %} selected {% endif %}>{{ partner.name_english }}</option> 
+                      				{% endif %}
+                      			{% endfor %}	
+                      		</select>
+                    
+                        {% else %}
+                        	<i class="fa fa-circle-o"></i>
+                        {% endif %}
+                        </td>
+                        
+                        <td class='{{ case.status}}'>
+                         {% if case.partner.name_english %}
+                       	<a href="/review_request/add?cid={{ case.id }}" role="button" class="btn btn-round btn-info btn-xs"><i class="fa fa-tag"></i> Review request</a>
+                        {% endif %}
+                        {% if request.user.is_superuser == 1 %}
+                        	<a href="/case/delete?id={{ case.id }}&language={{ case.language }}" role="button" class="btn btn-round btn-danger btn-xs"><i class="fa fa-trash"></i> Delete</a>
+                        {% endif %}
+                        </td>
+                                                           
+                        </tr>
+                       {% endfor %}  
+                       </tbody>
+                       
+                      </table>
+                      
+                       {% endif %}
+                      
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+{% endblock %}

@@ -1,0 +1,15 @@
+
+{% for item in bi_weekly_data_list %}
+
+             {% if item.product_id == product   and item.week == wk %}	
+                        
+                        	
+                            <td>{{ item.assigned }}</td>
+                            <td>{{ item.needinfo }}</td>
+                           
+                            <td>{{ item.blocked }}</td>
+                            <td>{{ item.review_requested }}</td>
+                            <td>{{ item.get_backlog }}</td>
+                        
+              {% endif %}
+{% endfor %}  

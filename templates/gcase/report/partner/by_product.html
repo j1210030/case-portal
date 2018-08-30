@@ -1,0 +1,84 @@
+{% extends 'gcase/common/base.html' %}
+{% load staticfiles %}
+{% block js %}
+<script src="{% static 'js/ajax/partner.js' %}"></script>
+{% endblock %}
+{% block content %}
+
+
+<div class="">
+            <div class="page-title">
+              <div class="title_left">
+                <h3><i class="fa fa-cubes"></i> Partner Case Report </h3>
+                
+              </div>
+            </div>
+            
+            <div class="clearfix"></div>
+
+			{% include "gcase/report/partner/filter.html" %} 
+			 
+           
+           <!-- total / Summary -->
+           <div class="clearfix"></div>
+
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                
+                <div class="x_title">
+                    <h2><small>Summary ( By product )</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  
+                  <div class="x_content">
+                  	{% include 'gcase/common/show_message.html' %}
+                     
+                      
+                      <div class="col-md-12 col-sm-12 col-xs-12">
+                      
+                      <div class="table-responsive">
+                      	<table class="table table-bordered">
+                      		<thead>
+                      			<tr>
+                      				<th style="background-color:#C6E2FF;font-size:110%;">Total</th>
+                      				<th style="background-color:#C6E2FF;font-size:110%;">
+                      					<img src="{{ MEDIA_URL }}products/2017/08/android.png" class="img-rounded" alt="Logo" width="20" height="20">&nbsp;Android
+                      					&nbsp;<a href='#' onclick='showDetail("1");return false;'> <i>[ Show details ]</i></a>
+                      				</th>
+                      				<th style="background-color:#C6E2FF;font-size:110%;">
+                      					<img src="{{ MEDIA_URL }}products/2017/08/firebase.png" class="img-rounded" alt="Logo" width="20" height="20">
+                      					&nbsp;Firebase
+                      					<a href='#' onclick='showDetail("2");return false;'> <i>[ Show details ]</i></a>
+                      					</th>
+                      			</tr>		
+                      		</thead>
+                      		<tbody>
+                      			<tr>
+                      				<td width="300px">  {% include "gcase/report/partner/total.html" %}  </td>
+                      				
+                      				<td width="300px">   {% include "gcase/report/partner/android_total.html" %} </td>
+                      				
+                      				<td width="300px">   {% include "gcase/report/partner/firebase_total.html" %} </td>
+                      			</tr>
+                      		</tbody>
+                      	
+                      	</table>
+                     </div>
+                  </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+     </div>
+     
+     <div class="modal fade bs-example-modal-lg" id="partner-detail-dialog" tabindex="-1" role="dialog" aria-hidden="true">
+                    
+	</div>
+     
+   {% endblock %}         

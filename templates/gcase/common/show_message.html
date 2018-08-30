@@ -1,0 +1,19 @@
+                            {% load i18n %}
+                            {% load staticfiles %}
+                            {% if messages %}    
+                               {% for message in messages %}
+                               {% if message.tags == 'error' %}
+                               <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                               {% else %}
+                               <div class="alert alert-{{ message.tags }} alert-dismissible fade in" role="alert"">
+                               {% endif %}
+                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+                    				</button>
+                                   
+                                    <strong>{{  message }}</strong>
+                                </div>
+                                {% endfor %}
+                            {% endif %}
+                            
+                            
+                        

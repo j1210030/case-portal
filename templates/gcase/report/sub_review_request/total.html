@@ -1,0 +1,23 @@
+					<table border="1" class="complexTbl">
+                      		<thead>
+                        	<tr class="headings">
+                          	<th>Week</th>
+                          	<th>OK</th>
+                          	<th>NG</th>
+                          	<th>Ratio(&#37;)</th>
+                          	<th>Monthly(&#37;)</th>
+                          	</tr>
+                      		</thead>
+                      	<tbody>
+                     	 {% for item in total_list %}
+                        <tr>
+                        	<td>{{ item.week | date:"d.m.Y" }}</td>
+                            <td>{{ item.total_ok }}</td>
+                            <td>{{ item.total_ng }}</td>
+                            <td>{{ item.avg_ok_ratio }}</td>
+                            <td>{{ item.avg_monthly_percent }}</td>
+                        </tr>
+                       {% endfor %}  
+                       </tbody>
+                       
+                      </table>

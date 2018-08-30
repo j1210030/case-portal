@@ -1,0 +1,382 @@
+{% extends 'gcase/common/base.html' %}
+{% load staticfiles %}
+{% block js %}
+
+{% endblock %}
+{% block content %}
+
+
+<div class="">
+            <div class="page-title">
+              <div class="title_left">
+                <h3><i class="fa fa-tags"></i> Firebase Component Report </h3>
+                
+              </div>
+            </div>
+            
+            <div class="clearfix"></div>
+
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2><small>Search</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+                    <form class="form-horizontal form-label-left input_mask">
+      			
+                      <div class="col-md-2 col-sm-2 col-xs-12 form-group has-feedback">
+                      			<label>
+                      			From
+                      			</label>
+                          		<select name="from_year" id="from_year" class="form-control">
+                          			<option value="">Year</option>
+                          			{% for year in from_year_options %}
+                          			<option value="{{ year }}" {% if year == from_year %} selected {% endif %}>{{ year }}</option>
+                          			{% endfor %}
+                          		</select>
+                   	</div>
+                   	 <div class="col-md-2 col-sm-2 col-xs-12 form-group has-feedback">
+                   	 			<label>
+                      			
+                      			</label>
+                          		<select name="from_month" id="from_month" class="form-control">
+                          			<option value="">Month</option>
+                          			{% for month in month_options %}
+                          			<option value="{{ month }}" {% if month == from_month %} selected {% endif %} >{{ month }}</option>
+                          			{% endfor %}
+                          		</select>
+                   	</div>
+                   	
+                   	
+                   	<div class="col-md-2 col-sm-2 col-xs-12 form-group has-feedbac">
+                   	</div>
+                  
+                   	<div class="col-md-2 col-sm-2 col-xs-12 form-group has-feedbac">
+                          		<label>To</label>
+                          		<select name="to_year" id="to_year" class="form-control">
+                          			<option value="">Year</option>
+                          			{% for year in to_year_options %}
+                          			<option value="{{ year }}" {% if year == to_year %} selected {% endif %}>{{ year }}</option>
+                          			{% endfor %}
+                          		</select>
+                   	</div>
+                   	 <div class="col-md-2 col-sm-2 col-xs-12 form-group has-feedbac">
+                   	 	<label></label>
+                          		<select name="to_month" id="to_month" class="form-control">
+                          			<option value="">Month</option>
+                          			{% for month in month_options %}
+                          			<option value="{{ month }}" {% if month == to_month %} selected {% endif %}>{{ month }}</option>
+                          			{% endfor %}
+                          		</select>
+                   	</div>
+                   	
+                   	
+  					<div class="form-group pull-right">
+  						<div class="col-md-12 col-sm-9">
+                         <input type="checkbox" name="csv"  value="1" /> CSV Download &nbsp;&nbsp;
+                          <button type="submit"  class="btn btn-sm btn-rounded btn-primary"> <i class="fa fa-search"></i>&nbsp;Submit</button>
+                        </div>
+                      </div>
+                      
+                    </form>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+          
+            <div class="clearfix"></div>
+
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                
+                 <div class="x_title">
+                    		<h2><small>Monthly case count</small></h2>
+                    		<ul class="nav navbar-right panel_toolbox">
+                     		 	<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      			</li>
+                    		</ul>
+                    		<div class="clearfix"></div>
+                  </div>
+                  
+                  <div class="x_content">
+                  
+                      <div class="table-responsive">
+                      	
+                      	
+                      	<table border="1" class="complexTbl">
+                      	<thead>
+                      	<tr>
+                      		<th style="width:210px">
+                      			Component
+                      		</th>
+                      		
+                      		 {% for month in month_list %}
+                      		 <th>
+                      		 	{{ month.month  | date:"m/y"}}
+                      		 </th>
+                      		 {% endfor %}
+                      		
+                      		<th>
+                      			Total
+                      		</th>
+                      		<th>
+                      			Average
+                      		</th>
+                      	</tr>
+                      	</thead>
+                      	<tbody>
+                      		 {% for item in component_report_list %}
+                      		 <tr>
+                      		 	<td>
+                      		 		{{ item.component}}
+                      		 	</td>	
+                      		 	{% for data in item.monthly_count %}
+                      		 		<td>
+                      		 			{{ data.case_count }}
+                      		 		</td>
+                      		 	{% endfor %}
+                      		 	
+                      		 	<td>
+                      		 		{{ item.total }}
+                      		 	</td>
+                      		 	<td>
+                      		 	{{ item.average }}
+                      		 	</td>
+                      		 </tr>
+                      		 {% endfor %}
+                      	
+                      	</tbody>
+                      	
+                      	
+                      </table>
+                      </div>
+                      
+                      
+                  </div>
+                </div>
+              </div>
+            
+            
+            <!--  Total chart -->
+           <div class="clearfix"></div>
+
+            <div class="row">
+              		<div class="col-md-12 col-sm-12 col-xs-12">
+                	<div class="x_panel">
+                	
+                		 <div class="x_title">
+                    		<h2><small>Total Chart</small></h2>
+                    		<ul class="nav navbar-right panel_toolbox">
+                     		 	<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      			</li>
+                    		</ul>
+                    		<div class="clearfix"></div>
+                  		</div>
+                	
+            			<div class="x_content">
+                    		<div id="echart_component_total" style="height:600px;"></div>
+                  		</div>
+                  	</div>
+            	</div>
+            	</div>
+            	
+            	<!--  Monthly chart -->
+           <div class="clearfix"></div>
+
+            <div class="row">
+              		<div class="col-md-12 col-sm-12 col-xs-12">
+                	<div class="x_panel">
+                	
+                		 <div class="x_title">
+                    		<h2><small>Monthly Chart</small></h2>
+                    		<ul class="nav navbar-right panel_toolbox">
+                     		 	<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      			</li>
+                    		</ul>
+                    		<div class="clearfix"></div>
+                  		</div>
+                	
+            			<div class="x_content">
+                    		<div id="echart_component_monthly" style="height:900px;display:none"></div>
+                  		</div>
+                  	</div>
+            	</div>
+            	</div>
+            	
+            </div>
+          
+    </div>
+    
+
+<script>
+$(document).ready(function() {
+	
+	var componentsArr = [];
+	var dataSeriesArr = [];
+	var monthsArr = []; 
+	
+	var theme = {
+			  color: [
+				    "#ff7f50",
+				    "#87cefa",
+				    "#da70d6",
+				    "#00C3C3",
+				    "#32cd32",
+				    "#6495ed",
+				    "#007600",
+				    "#ff69b4",
+				    "#ba55d3",
+				    "#cd5c5c",
+				    "#7f007f",
+				    "#ffa500",
+				    "#40e0d0",
+				    "#7a5230",
+				    "#1e90ff",
+				    "#ff6347",
+				    "#7b68ee",
+				    "#b2b200",
+				    "#00fa9a",
+				    "#b20000",
+				    "#ffd700",
+				    "#6699FF",
+				    "#ff6666",
+				    "#3cb371",
+				    "#b8860b",
+				    "#30e0e0",
+				    "#3232ff",
+				    "#DB70DB"
+			  ]
+	}
+	var componentChartMonthly = echarts.init(document.getElementById('echart_component_monthly'),theme);
+	
+	{% for month in month_list %}
+		monthsArr.push('{{ month.month  | date:"m/y" }}');
+	{% endfor %}
+	
+	{% for item in component_report_list %}
+    {% if item.total > 0 %}
+    	var seriesObj = {};
+    	componentsArr.push('{{ item.component }}');
+    	seriesObj['name'] = '{{ item.component }}'
+    	seriesObj['type'] = 'line';
+    	caseCountArr = [];
+    	{% for data in item.monthly_count %}
+    		caseCountArr.push('{{ data.case_count }}');
+    	{% endfor %}
+    	seriesObj['data'] = caseCountArr;
+    	
+    	dataSeriesArr.push(seriesObj);
+    {% endif %}
+	{% endfor %}
+	
+	console.log(monthsArr);
+	
+	var optionMonthly = {
+		    title: {
+		        text: 'Component Report',
+		        subtext: 'Monthly'
+		    },
+		    tooltip: {
+		        trigger: 'axis'
+		    },
+		    legend: {
+		        data:  componentsArr
+		    },
+		    toolbox: {
+		        show: true,
+		        feature: {
+		            dataZoom: {
+		                yAxisIndex: 'none'
+		            },
+		            dataView: {readOnly: false},
+		            magicType: {type: ['line', 'bar']},
+		            restore: {},
+		            saveAsImage: {}
+		        }
+		    },
+		    xAxis:  {
+		        type: 'category',
+		        boundaryGap: false,
+		        data: monthsArr
+		    },
+		    yAxis: {
+		        type: 'value',
+		        axisLabel: {
+		            formatter: '{value}'
+		        }
+		    },
+		    series: dataSeriesArr
+		};
+
+	
+	componentChartMonthly.setOption(optionMonthly);
+	
+	
+	console.log(' Echart is called--');
+	var componentChart = echarts.init(document.getElementById('echart_component_total'), theme);
+	var dataArr = [];
+	
+    {% for item in component_report_list %}
+    {% if item.total > 0 %}
+    	var obj = {};
+    	obj["name"] = '{{ item.component }}';
+    	obj["value"] = '{{ item.total }}';
+    	
+    	dataArr.push(obj);
+    {% endif %}
+	{% endfor %}
+	
+	console.log(dataArr);
+	
+	var option = {
+		    title : {
+		        text: 'Component Chart',
+		        subtext: 'Firebase',
+		        x:'center'
+		    },
+		    tooltip : {
+		        trigger: 'item',
+		        formatter: "{a} <br/>{b} : {c} ({d}%)"
+		    },
+		   // legend: {
+		       // orient: 'vertical',
+		       // left: 'left',
+		        //data: ['FCM','RTB','AdMob','GA Firebase','Auth']
+		   // },
+		    series : [
+		        {
+		            name: 'Source',
+		            type: 'pie',
+		            //radius : '55%',
+		            //center: ['50%', '60%'],
+		            data:dataArr,
+		            itemStyle: {
+		                emphasis: {
+		                    shadowBlur: 10,
+		                    shadowOffsetX: 0,
+		                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+		                }
+		            }
+		        }
+		    ]
+		};
+
+
+    // use configuration item and data specified to show chart
+   componentChart.setOption(option);
+});
+</script>
+
+{% endblock %}
+
+

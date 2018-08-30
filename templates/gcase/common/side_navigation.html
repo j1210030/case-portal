@@ -1,0 +1,113 @@
+        {% load i18n %}
+        {% load humanize %}
+        {% load staticfiles %}
+        
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+              <div class="menu_section">
+                
+                <ul class="nav side-menu">
+                  
+                  <li {% if view_name == "home" %} class="current-page" {% endif %}><a href="{% url 'home' %}"><i class="fa fa-home"></i> Home</a></li>
+                  <li {% if view_name == "dashboard" %} class="current-page" {% endif %}><a href="{% url 'dashboard' %}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                  <li {% if view_name == "case" %} class="current-page" {% endif %}><a href="{% url 'case_list' %}"><i class="fa fa-database"></i> Case record</a></li>
+                  <li><a href="{% url 'review_request_list' %}"><i class="fa fa-tags"></i>Review request</a></li>
+                
+                  <li><a><i class="fa fa-area-chart"></i> Report <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu" {% if view_name == "report" %} style="display: block;" {% endif %}>
+                      
+                      <li {% if view_name == "report" and action == "backlog" %} class="current-page" {% endif %}>
+                        <a href="{% url 'backlog_report' %}">Backlog</a>
+                      </li>
+                       
+                       <li {% if view_name == "report" and action == "language" %} class="current-page" {% endif %}>
+                        <a href="{% url 'language_report' %}">Language</a>
+                      </li>
+                      
+                       <li><a>Individual report<span class="fa fa-chevron-down"></span></a>
+                          <ul class="nav child_menu">
+                            
+                           <li {% if view_name == "report" and action == "individual" %} class="current-page" {% endif %}>
+                              <a href="{% url 'individual_report' %}">All members</a>
+                          </li>
+                             <li {% if view_name == "report" and action == "individual_by_member" %} class="current-page" {% endif %}>
+                              <a href="{% url 'individual_by_member_report' %}">By member</a>
+                          </li>
+                          </ul>
+                        </li>
+                     
+                      
+                      
+                      <li {% if view_name == "report" and action == "component" %} class="current-page" {% endif %}>
+                        <a href="{% url 'component_report_view' %}">Component(Firebase)</a>
+                      </li>
+                      
+                        <li {% if view_name == "report" and action == "partner_nonpartner" %} class="current-page" {% endif %}>
+                         <a href="{% url 'partner_nonpartner_report' %}">Partner Non-Partner</a>
+                        </li>
+                        
+                        <li {% if view_name == "report" and action == "partner" %} class="current-page" {% endif %}>
+                         
+                       
+                          <li><a>Partner case report<span class="fa fa-chevron-down"></span></a>
+                          <ul class="nav child_menu">
+                            
+                            <li><a href="{% url 'partner_report_monthly' %}">Monthly</a>
+                            </li>
+                            <li><a href="{% url 'partner_report_total' %}">Total</a>
+                            </li>
+                          </ul>
+                        </li>
+                        
+                        <li {% if view_name == "report" and action == "review_request_quality" %} class="current-page" {% endif %}>
+                         	<a href="{% url 'review_request_quality_report' %}">DA Review</a>
+                        </li>
+                       </ul>
+                  </li>
+                   <li {% if view_name == "da_bi_weekly" %} class="current-page" {% endif %}><a href="{% url 'da_report_view' %}"><i class="fa fa-bar-chart"></i> DA Bi-Weekly</a></li>
+                   <li {% if view_name == "yearly_report" %} class="current-page" {% endif %}><a href="{% url 'yearly_view' %}"><i class="fa fa-area-chart"></i> Yearly report</a></li>
+                  
+                
+                  <li><a><i class="fa fa-exchange"></i> Top Partners <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu"  {% if view_name == "partner" %} style="display: block;" {% endif %}>
+                      <li {% if action == "jp" %} class="current-page" {% endif %}><a href="{% url 'partner' %}?hl=jp">Japan</a></li>
+                      <li {% if action == "ko" %} class="current-page" {% endif %}><a href="{% url 'partner' %}?hl=ko">Korea</a></li>
+                      <li {% if action == "zh" %} class="current-page" {% endif %}><a href="{% url 'partner' %}?hl=zh">China</a></li>
+                     
+                     
+                    </ul>
+                  </li>
+                   {% if request.user.is_superuser == 1 %}
+                  <li><a><i class="fa fa-gears"></i> Admin <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu"  {% if view_name == "product" or view_name == "user" %} style="display: block;" {% endif %}>
+                      <li {% if view_name == "user" %} class="current-page" {% endif %}><a href="{% url 'user_list' %}">User</a></li>
+                      <li {% if view_name == "product" %} class="current-page" {% endif %}><a href="{% url 'product' %}">Products</a></li>
+                      <li {% if view_name == "component" %} class="current-page" {% endif %}><a href="{% url 'component' %}">Components</a></li>
+                      <li {% if view_name == "firebase_category" %} class="current-page" {% endif %}><a href="#">FB Categories</a></li>
+                    </ul>
+                  </li>
+                  {% endif %}
+                  
+                  
+                </ul>
+              </div>
+              
+            </div>
+            <!-- /sidebar menu -->
+
+            <!-- /menu footer buttons -->
+            <div class="sidebar-footer hidden-small">
+              <a data-toggle="tooltip" data-placement="top" title="Settings">
+                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="Lock">
+                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+              </a>
+              
+             </div>
+              

@@ -1,0 +1,30 @@
+					<table border="1" class="complexTbl">
+                      		<thead>
+                        	<tr class="headings">
+                          	<th>Week</th>
+                          	<th>Assigned</th>
+                          	<th>Need info</th>
+                          	<th>In Consult</th>
+                          	<th>Blocked</th>
+                          	<th>Review requested</th>
+                          	<th style="background-color:#b2cdff">Total Backlog</th>
+                          	<th style="background-color:#ffe4b2">Forwarded</th>
+                          	
+                        	</tr>
+                      		</thead>
+                      	<tbody>
+                     	 {% for item in total_list %}
+                        <tr>
+                        	<td>{{ item.week | date:"d.m.y" }}</td>
+                            <td>{{ item.total_assigned }}</td>
+                            <td>{{ item.total_needinfo }}</td>
+                            <td>{{ item.total_inconsult }}</td>
+                            <td>{{ item.total_blocked }}</td>
+                            <td>{{ item.total_review_requested }}</td>
+                            <td>{{ item.total_assigned | add:item.total_needinfo | add:item.total_inconsult | add:item.total_blocked | add:item.total_review_requested }}</td>
+                            <td>{{ item.total_forwarded }}</td>
+                        </tr>
+                       {% endfor %}  
+                       </tbody>
+                       
+                      </table>

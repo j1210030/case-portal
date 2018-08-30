@@ -1,0 +1,32 @@
+					<table border="1" class="complexTbl">
+                      		<thead>
+                        	<tr class="headings">
+                          	<th>Week</th>
+                          	<th>Assigned</th>
+                          	<th>Need info</th>
+                          	<th>In Consult</th>
+                          	<th>Blocked</th>
+                          	<th>Review requested</th>
+                          	<th style="background-color:#b2cdff">Total Backlog</th>
+                          	<th style="background-color:#ffe4b2">Forwarded</th>
+                          	
+                        	</tr>
+                      		</thead>
+                      	<tbody>
+                     	 {% for item in backlog_list %}
+                         {% if item.product_id == product %}	
+                        <tr>
+                        	<td>{{ item.week | date:"d.m.Y" }}</td>
+                            <td>{{ item.assigned }}</td>
+                            <td>{{ item.needinfo }}</td>
+                            <td>{{ item.inconsult }}</td>
+                            <td>{{ item.blocked }}</td>
+                            <td>{{ item.review_requested }}</td>
+                            <td>{{ item.assigned | add:item.needinfo | add:item.inconsult | add:item.blocked | add:item.review_requested }}</td>
+                            <td>{{ item.forwarded }}</td>
+                        </tr>
+                        {% endif %}
+                       {% endfor %}  
+                       </tbody>
+                       
+                      </table>

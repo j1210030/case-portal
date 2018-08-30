@@ -1,0 +1,60 @@
+ <div class="table-responsive">
+                      	
+                      	<table border="1" class="complexTbl">
+                      	<thead>
+                      		<tr>
+                      		
+                      		<th>Product</th>
+                      		<th>Incoming </th>
+                          	<th>Incoming(Partner)</th>
+                          	<th>SO</th>
+                          	<th>SO(Partner)</th>
+                          	</tr>
+                          </thead>
+                          <tbody>
+                          
+                          	<tr>
+                          	
+                          		<th style="text-align:left;border-bottom: 2px solid #9ACD32;">
+                      				<img src="{{ MEDIA_URL }}products/2017/08/android.png" class="img-rounded" alt="Logo" width="25" height="25">
+                      				Android
+                      			</th>
+                      			
+                      			<td>{{ incoming.android }}</td>
+                            	<td>{{ incoming_partner.android }}</td>
+                            	<td>{{ so.android }}</td>
+                            	<td>{{ so_partner.android }}</td>
+                            
+                      			
+                          	</tr>
+                          	<tr>
+                          		<th style="text-align:left;border-bottom: 2px solid #ffc04c;">
+                      				<img src="{{ MEDIA_URL }}products/2017/08/firebase.png" class="img-rounded" alt="Logo" width="25" height="25">
+                      				Firebase
+                      			</th>
+                      			<td>{{ incoming.firebase }}</td>
+                            	<td>{{ incoming_partner.firebase }}</td>
+                            	<td>{{ so.firebase }}</td>
+                            	<td>{{ so_partner.firebase }}</td>
+                      			
+                          	</tr>
+                          	<tr>
+                          		<th style="text-align:left;">
+                      				Total
+                      			</th>
+                      			
+                      			<td>{{ incoming.total }}</td>
+                            	<td>{{ incoming_partner.total }}</td>
+                            	<td>{{ so.total }}</td>
+                            	<td>{{ so_partner.total }}</td>
+                      			
+                      			
+                      			 
+                          	</tr>
+                          	
+                          	
+                          </tbody>
+                          	
+                     
+                      </table>
+                      </div>

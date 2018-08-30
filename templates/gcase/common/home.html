@@ -1,0 +1,27 @@
+{% extends 'gcase/common/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+
+<div class="">
+            <div class="page-title">
+              <div class="title_left">
+                <h3>Tokyo DPS Portal</h3>
+                
+              </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+              	 {% include 'gcase/common/show_message.html' %}
+                 <img src="{% static 'images/home.png' %}" style="max-width:50%;max-height:50%" class="img-responsive center-block img-thumbnail"  />
+                 
+            </div>
+          
+          
+          </div>
+
+
+{% endblock %}

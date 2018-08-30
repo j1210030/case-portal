@@ -1,0 +1,41 @@
+<h3>
+I am parsing CSV and insert into DB
+</h3>
+
+	<table  cellspacing="3" width="100%" border="1">
+                      <thead>
+                        <tr>
+                          <th>No</th>
+                          <th>Id</th>
+                          <th>Subject</th>
+                          <th>Language</th>
+                           <th>Product</th>
+                           <th>Component</th>
+                          <th>Incoming date</th>
+                          <th>Week</th>
+                           <th>Assignee</th>
+                          <th>Partner</th>
+                          <th>Status</th>
+                        </tr>
+                      </thead>
+                      
+                       <tbody>
+                      {% for case in case_list %}
+                        <tr>
+                        	<td>{{ case.no }}</td>
+                       		 <td>{{ case.id }}</td>
+                       	 	<td>{{ case.subject }}</td>
+                       	 	<td>{{ case.language }}</td>
+                        	<td>{{ case.product_id }}</td>
+                        	<td> {{ case.component_id }}</td>
+                        	<td>{{ case.incoming_date }}</td>
+                        	<td>{{ case.week }}</td>
+                        	<td>{{ case.gcase_user_id }}</td>
+                        	<td>{{ case.partner_id }}</td>
+                        	<td>{{ case.status }}</td>
+                        
+                       </tr>
+                      {% endfor %}
+                      </tbody>
+                     </table>
+                      

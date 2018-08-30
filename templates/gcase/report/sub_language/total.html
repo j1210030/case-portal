@@ -1,0 +1,75 @@
+                        
+
+
+                        <table border="1" class="complexTbl">
+                      		<thead>
+                        	<tr>
+                          	
+                            <th style="text-align:left;border-bottom: 2px solid #34495E;">Week</th>
+                         
+                          	<th style="text-align:left;border-bottom: 2px solid #34495E;">Language</th>
+                          
+                          	<th style="text-align:left;border-bottom: 2px solid #34495E;">Incoming</th>
+                          	<th style="text-align:left;border-bottom: 2px solid #34495E;">Partner</th>
+                          	<th style="text-align:left;border-bottom: 2px solid #34495E;">SO</th>
+                        	</tr>
+                      		</thead>
+                      	<tbody>
+
+                     	 {% for item in week_list %}
+                        <tr>
+                        
+                        	  <td  rowspan="3" style="vertical-align:middle;background-color:#FAFAFA">{{ item.week | date:"d.m.y" }} </td>
+                            {% for report in total_list %}
+                             
+                              {% if report.language == 'jp' and item.week == report.week %} 
+                              <td>Japanese</td>
+                             
+                              <td>{{ report.total_incoming }}</td>
+                              <td>{{ report.total_incoming_partner }}</td>
+                             
+                              <td>{{ report.total_so }}</td>
+                              
+                            {% endif %}
+                            {% endfor %}
+                        </tr>
+                         
+                        
+                        {% for report in total_list %}
+                             
+                          {% if report.language == 'ko' and item.week == report.week %} 
+                              <td>Korean</td>
+                              
+                              <td>{{ report.total_incoming }}</td>
+                              <td>{{ report.total_incoming_partner }}</td>
+                              <td>{{ report.total_so }}</td>
+                            
+                            {% endif %}
+                            {% endfor %}
+                       </tr>       
+                      <tr>  
+                        {% for report in total_list %}
+                             
+                          {% if report.language == 'zh' and item.week == report.week %} 
+                              <td>Chinese</td>
+                            
+                             <td>{{ report.total_incoming }}</td>
+                             <td>{{ report.total_incoming_partner }}</td>
+                             
+                             <td>{{ report.total_so }}</td>
+                             
+                            {% endif %}
+                            {% endfor %}
+                       </tr>
+                       <tr>
+                       	<td colspan="3" height="2px"></td>
+                       </tr>       
+  
+                          
+
+                        {% endfor %}
+
+                       </tbody>
+                       
+                      </table>
+                

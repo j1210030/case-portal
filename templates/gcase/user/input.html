@@ -1,0 +1,243 @@
+{% extends 'gcase/common/base.html' %}
+{% load staticfiles %}
+
+{% block js %}
+<script src="{% static 'js/ajax/user.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+
+
+<div class="">
+            <div class="page-title">
+              <div class="title_left">
+                <h3><i class="fa fa-user"></i> Add/Update Users</h3>
+                
+              </div>
+
+              <div class="title_right">
+                
+              </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+              <div class="col-md-9 col-sm-9 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h4>
+                    {% if id %}
+                    	<i class="fa fa-edit"></i> Edit user
+                    {% else %}
+                    <i class="fa fa-plus"></i> Add new 
+                    {% endif %}
+                   
+                    </h4>
+                    
+                    
+                    <div class="pull-right">
+                    	<a href="#" onclick="history.go(-1);return false;" class="btn btn-round btn-primary btn-sm"><i class="fa fa-arrow-left"></i> Back</a>
+              		</div>
+                    
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                  		
+                  		{% include 'gcase/common/show_message.html' %}
+                       <form id="userRegisterForm" class="form-horizontal form-label-left" method="POST">
+						 {% csrf_token %}
+						<input type="hidden" name="id" id ="uid" value="{{ id }}" readonly />
+						
+					
+						
+						<div class="item form-group">
+                        	<label class="control-label col-md-3 col-sm-3 col-xs-12">First Name(English) <span class="required text-danger">*</span>
+                        	</label>
+                        	<div class="col-md-6 col-sm-6 col-xs-12">
+                        		{{ form.first_name }}		
+                       	 	</div>
+                      	</div>
+                      	
+                      	<div class="item form-group">
+                        	<label class="control-label col-md-3 col-sm-3 col-xs-12">Last Name(English) <span class="required text-danger">*</span>
+                        	</label>
+                        	<div class="col-md-6 col-sm-6 col-xs-12">
+                        		{{ form.last_name }}		
+                       	 	</div>
+                      	</div>
+                      	
+                      	
+                      	<div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Gender <span class="required text-danger">*</span></label>
+                        
+                         <div class="col-md-6 col-sm-6 col-xs-12">
+                        	
+                        	<div class="radio">
+                        	
+                            <label>
+                              <input type="radio" name="gender" value="M" class="flat" id="id_gender_0" {% if form.gender.value == 'M' %} checked="checked" {% endif %}/> Male
+                            </label>
+                          </div>
+                          <div class="radio">
+                            <label>
+                              <input type="radio" name="gender" value="F" class="flat" id="id_is_gener_1" {% if  form.gender.value == 'F' %} checked="checked" {% endif %}/> Female
+                            </label>
+                          </div>
+                          
+          
+                        </div>
+                        
+                      </div>
+                      
+                      
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Username<span class="required text-danger">*</span>
+                        </label>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          {{ form.username }}	
+                        </div>
+                        <span id="username_loading" style="display:none;"> <img src='/static/images/loading.gif' /> </span>
+                         <div class="text-danger" id="username_already_exist_msg" style="display:none;">
+                          	<i class="fa fa-times"></i>&nbsp;<b><i>Username already taken.</i></b>
+                          </div>
+                          <div class="text-danger" id="username_invalid_msg" style="display:none;">
+                          	<i class="fa fa-times"></i>&nbsp;<b><i>Please input a valid username.</i></b>
+                          </div>
+                           <div class="text-success" id="username_available_msg" style="display:none;">
+                          	<i class="fa fa-check-square"></i>&nbsp;<b><i>Username available.</i></b>
+                          </div>
+                      </div>
+                      
+                      
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Password<span class="required text-danger">*</span>
+                        </label>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                        	{{ form.password }}		
+                         
+                        </div>
+                      </div>
+                      
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Confirm Password<span class="required text-danger">*</span>
+                        </label>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                        	{{ form.confirm_password }}		
+                        </div>
+                        <div class="text-danger" id="password_didnot_match" style="display:none;">
+                          	<i class="fa fa-times"></i>&nbsp;<b><i>Password did not match!</i></b>
+                          </div>
+                      </div>
+                      
+                      
+                      
+                      
+                       <div class="item form-group">
+                        	<label class="control-label col-md-3 col-sm-3 col-xs-12" for="Added on">Joining date <span class="required text-danger">*</span>
+                      		 </label>
+                       		<div class="col-md-4 col-sm-4 col-xs-12">
+                       			{{ form.joined_on }}
+                       			<span class="fa fa-calendar-o form-control-feedback right" aria-hidden="true"></span>
+                                
+                       		</div>
+                       </div>
+                       
+                       <div class="item form-group">
+                        	<label class="control-label col-md-3 col-sm-3 col-xs-12" for="Added on">Release date
+                      		 </label>
+                       		<div class="col-md-4 col-sm-4 col-xs-12">
+                       			{{ form.released_on }}
+                       			<span class="fa fa-calendar-o form-control-feedback right" aria-hidden="true"></span>
+                                
+                       		</div>
+                       </div>
+                       
+                       
+                       
+                       
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="company_url">Status  <span class="required text-danger">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                        	
+                        	<div class="radio">
+                        	
+                            <label>
+                              <input type="radio" name="is_active" value="True" class="flat" id="id_is_active_0" {% if form.is_active.value == True %} checked="checked" {% endif %}/> Active
+                            </label>
+                          </div>
+                          <div class="radio">
+                            <label>
+                              <input type="radio" name="is_active" value="False" class="flat" id="id_is_active_1" {% if  form.is_active.value == False %} checked="checked" {% endif %}/> In active
+                            </label>
+                          </div>
+                          
+          
+                        </div>
+                      </div>
+                      
+                      <div class="form-group">
+                      
+                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="company_url">Case handler?  <span class="required text-danger">*</span>
+                        </label>
+                      	<div class="col-md-6 col-sm-6 col-xs-12">
+                          
+                          <div class="radio">
+                        	
+                            <label>
+                              <input type="radio" name="case_handler" value="True" class="flat" id="id_icase_handler_0" {% if form.case_handler.value == True %} checked="checked" {% endif %}/> Yes
+                            </label>
+                          </div>
+                          <div class="radio">
+                            <label>
+                              <input type="radio" name="case_handler" value="False" class="flat" id="id_case_handler_1" {% if  form.case_handler.value == False %} checked="checked" {% endif %}/> No
+                            </label>
+                          </div>
+                          
+                         </div>
+                       </div>
+                       
+                        <div class="form-group">
+                      
+                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="company_url">Super user?  <span class="required text-danger">*</span>
+                        </label>
+                      	<div class="col-md-6 col-sm-6 col-xs-12">
+                          
+                          <div class="radio">
+                        	
+                            <label>
+                              <input type="radio" name="is_superuser" value="True" class="flat" id="id_is_superuser_0" {% if form.is_superuser.value == True %} checked="checked" {% endif %}/> Yes
+                            </label>
+                          </div>
+                          <div class="radio">
+                            <label>
+                              <input type="radio" name="is_superuser" value="False" class="flat" id="id_is_superuser_1" {% if  form.is_superuser.value == False %} checked="checked" {% endif %}/> No
+                            </label>
+                          </div>
+                          
+                         </div>
+                       </div>
+                       
+                       
+                      
+                      <div class="ln_solid"></div>
+                      <div class="form-group">
+                        <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+                          <a href="{% url 'user_list' %}" class="btn btn-warning"><i class="fa fa-times"></i> Cancel</a>
+                          <button type="submit" id="userSubmitBtn" class="btn btn-primary"><i class="fa fa-save"></i> Submit</button>
+                        </div>
+                      
+                      </div>
+                      	
+                      		
+                    </form>
+                      
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+{% endblock %}

@@ -1,0 +1,19 @@
+<table border="1" class="complexTbl">
+                      	<thead>
+                      	<tr>
+                      		<th style="text-align:left;border-bottom: 2px solid #9ACD32;">Year</th>
+                            <th style="text-align:left;border-bottom: 2px solid #9ACD32;">Month</th>
+                            <th style="text-align:left;border-bottom: 2px solid #9ACD32;">Case count</th>
+                           
+                      	</tr>
+                      	</thead>
+                      	<tbody>
+                      		{% for item in android_list %}
+                      		<tr>
+                      			<td>{{ item.0 }}</td>
+                      			<td>{{ item.1 }}</td>
+                      			<td>{{ item.2 }}</td>
+                      		</tr>
+                      		{% endfor %}
+                      	</tbody>
+                      	</table>

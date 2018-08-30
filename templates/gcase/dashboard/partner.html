@@ -1,0 +1,51 @@
+ <div class="table-responsive">
+                      	
+                      	<table border="1" class="complexTbl">
+                      	<thead>
+                      		<tr>
+                      		
+                      		<th>Product</th>
+                      		<th>Assigned</th>
+                          	<th>Need info</th>
+                          	<th>In Consult</th>
+                          	<th>Blocked</th>
+                          	<th>Review requested</th>
+                          	<th style="background-color:#b2cdff">Total Backlog</th>
+                          	<th style="background-color:#ffe4b2">Forwarded</th>
+                          	
+                          	</tr>
+                          </thead>
+                          <tbody>
+                          
+                          	<tr>
+                          	
+                          		<th style="text-align:left;border-bottom: 2px solid #9ACD32;">
+                      				<img src="{{ MEDIA_URL }}products/2017/08/android.png" class="img-rounded" alt="Logo" width="25" height="25">
+                      				Android
+                      			</th>
+                      			{% include "gcase/dashboard/product_sub.html" with product=partner.android backlog=partner.android_backlog %}  
+                      			
+                      			
+                          	</tr>
+                          	<tr>
+                          		<th style="text-align:left;border-bottom: 2px solid #ffc04c;">
+                      				<img src="{{ MEDIA_URL }}products/2017/08/firebase.png" class="img-rounded" alt="Logo" width="25" height="25">
+                      				Firebase
+                      			</th>
+                      			{% include "gcase/dashboard//product_sub.html" with product=partner.firebase backlog=partner.firebase_backlog %} 
+                          	</tr>
+                          	<tr>
+                          		<th style="text-align:left;">
+                      				Total
+                      			</th>
+                      			{% include "gcase/dashboard/total_sub.html" with total=partner.total total_backlog=partner.total_backlog %} 
+                      			
+                      			 
+                          	</tr>
+                          	
+                          	
+                          </tbody>
+                          	
+                     
+                      </table>
+                      </div>

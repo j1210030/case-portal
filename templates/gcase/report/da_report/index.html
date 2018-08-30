@@ -1,0 +1,454 @@
+{% extends 'gcase/common/base.html' %}
+{% load staticfiles %}
+{% block js %}
+<script src="{% static 'js/ajax/da_report_chart.js' %}"></script>
+{% endblock %}
+{% block content %}
+
+
+<div class="">
+            <div class="page-title">
+              <div class="title_left">
+                <h3><i class="fa fa-bar-chart"></i>&nbsp;Bi-Weekly DA Report
+                
+                <span style="color:#cc0000">{{ period }}</span>
+                </h3>
+                
+              </div>
+            </div>
+            
+            <div class="clearfix"></div>
+
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2><small>Set date</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+                    <form class="form-horizontal form-label-left">
+      				
+      				 <div class="col-md-3 col-sm-3 col-xs-12 form-group">
+                      			
+                          		<input name="from" id="from_dt" class="form-control" />
+                          		<span class="fa fa-calendar-o form-control-feedback right" aria-hidden="true"></span>
+                          			
+                   	</div>
+                      
+  					<div class="col-md-4 col-sm-4 col-xs-12 form-group">
+  						
+                          <button type="submit"  class="btn btn-sm btn-rounded btn-primary"> <i class="fa fa-search"></i>&nbsp;Submit</button>
+                      
+                      </div>
+                      
+                    </form>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+          
+            <div class="clearfix"></div>
+			<!-- - SO -->
+            <div class="row">
+            
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                
+                	 <div class="x_title">
+                    		<h2><small>Summary ( Backlog/Incoming/SO)</small></h2>
+                    		<ul class="nav navbar-right panel_toolbox">
+                     		 	<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      			</li>
+                    		</ul>
+                    		<div class="clearfix"></div>
+                  </div>
+                  
+                  
+                  <div class="x_content">
+                      <div class="table-responsive">
+                      
+                      	<table class="table table-bordered">
+                      	
+                      		<thead>
+                      		
+                      		<tr>
+                      			<th style="text-align:left;border-bottom: 2px solid #0000CC;background-color:#87CEFF">
+                      				<span style="font-size:110%;"><strong>Backlog</strong></span>
+                      			</th>
+                      			<th style="text-align:left;border-bottom: 2px solid #0000CC;background-color:#87CEFF">
+                      				<span style="font-size:110%;"><strong>Incoming/SO</strong></span>
+                      			</th>
+                      		</tr>
+                      		
+                      		</thead>
+                      		
+                      		<tbody>
+                      		
+                      			<tr>
+                      				<td>
+                      				
+                      				{% include "gcase/report/da_report/da_backlog.html"%}   	
+                      				
+                      				</td>
+                      				
+                      				<td>
+                      				{% include "gcase/report/da_report/incoming_so.html"%}   
+                      				</td>
+                      			
+                      			</tr>
+                      		
+                      		</tbody>
+                      	</table>   	
+                   </div>
+                   
+                  
+                  <table border="1" class="complexTbl">
+                  	<thead>
+                  	<tr>
+                  		<th> Backlog</th>
+                  		<th>SO</th>
+                  	</tr>
+                  	</thead>
+                  	<tbody>
+                  	<tr>
+                  		<td style="width:50%">
+                  		<div id="echart_backlog" style="height:350px;"></div>
+                  		</td>
+                  		<td>
+                  		<div id="echart_so" style="height:350px;"></div>
+                  		</td>
+                  	</tr>
+                  	
+                  	</tbody>
+                   
+                 </table>
+                 </div>
+               </div>
+               
+           </div>
+    </div>
+    
+    
+    <!-- - Language -->
+      <div class="clearfix"></div>
+
+            <div class="row">
+            
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                
+                	 <div class="x_title">
+                    		<h2><small>Language ( Android/Firebase )</small></h2>
+                    		<ul class="nav navbar-right panel_toolbox">
+                     		 	<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      			</li>
+                    		</ul>
+                    		<div class="clearfix"></div>
+                  </div>
+                  
+                  
+                  <div class="x_content">
+                      <div class="table-responsive">
+                      
+                      
+                      
+                       <table class="table table-bordered">
+                        <tr>
+                        
+                         <th style="text-align:left;border-bottom: 2px solid #0000CC;background-color:#87CEFF">
+                            <span style="font-size:110%">Total</span>
+                          </th>
+                          
+                          <th style="text-align:left;border-bottom: 2px solid #9ACD32;background-color:#87CEFF">
+                            <img src="/static/images/min/1.png" class="img-rounded" alt="Logo" width="20" height="20">
+                            <span style="font-size:110%">Android</span>
+                          </th>
+
+                          <th style="text-align:left;border-bottom: 2px solid #ffc04c;background-color:#87CEFF">
+                            <img src="/static/images/min/2.png" class="img-rounded" alt="Logo" width="20" height="20">
+                            <span style="font-size:110%">Firebase</span>
+                          </th>
+                          
+                          
+
+                        </tr>
+                        
+
+                        <tr>
+                        	<td>
+                        		{% include "gcase/report/da_report/language/total.html" %} 
+                        	</td>
+                        
+                       		 <td>
+                               {% include "gcase/report/da_report/language/locale.html" with product=1 language_report=language_report_android %}
+                             
+                           	</td>
+                        	
+							<td>
+                               {% include "gcase/report/da_report/language/locale.html" with product=2  language_report=language_report_firebase %} 
+                        
+                           </td> 
+                  
+                           
+
+                        </tr>
+                      </table>
+                      	
+                      </div>
+                      
+                      
+                   <table border="1" class="complexTbl">
+                  	<thead>
+                  		<tr>
+                  			<th>Android (Incoming)</th>
+                  			<th>Firebase (Incoming)</th>
+                  		</tr>
+                  	</thead>
+                  	<tbody>
+                  	
+                  		<tr>
+                  	
+                  			<td style="width:50%">
+                  				<div id="echart_android_inflow" style="height:350px;"></div>
+                  			</td>
+                  		
+                  			<td>
+                  				<div id="echart_firebase_inflow" style="height:350px;"></div>
+                  			</td>
+                  		
+                  		</tr>
+                  	
+                  	</tbody>
+                   
+                 </table>
+                      
+                </div>
+               </div>
+              </div>
+               
+           </div>
+    </div>
+    
+    <!--  Component -->
+      <div class="clearfix"></div>
+
+            <div class="row">
+            
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                
+                	 <div class="x_title">
+                    		<h2><small>Inflow   ( Firebase component )</small></h2>
+                    		<ul class="nav navbar-right panel_toolbox">
+                     		 	<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      			</li>
+                    		</ul>
+                    		<div class="clearfix"></div>
+                  	</div>
+                  
+                  
+                  <div class="x_content">  
+				 	{% include "gcase/report/da_report/component.html"  %}
+    			  </div>
+    			</div>
+    		</div>
+    </div>
+    
+     <!--  Quality -->
+      <div class="clearfix"></div>
+
+            <div class="row">
+            
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                
+                	 <div class="x_title">
+                    		<h2><small>Quality   ( Android / Firebase )</small></h2>
+                    		<ul class="nav navbar-right panel_toolbox">
+                     		 	<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      			</li>
+                    		</ul>
+                    		<div class="clearfix"></div>
+                  	</div>
+                  
+                  
+                  <div class="x_content">  
+				 	{% include "gcase/report/da_report/quality.html"  %}
+    			  </div>
+    			</div>
+    		</div>
+    
+    
+    
+    
+    </div>
+    
+<script>
+$(document).ready(function() {
+	console.log(' Echart is called--');
+	
+	var weekArr = [];
+  	var androidBacklog = [];
+  	var firebaseBacklog = [];
+  	var totalBacklog = []
+  	
+  	var androidSo = [];
+  	var firebaseSo = [];
+  	var totalSo = []
+  	
+  	var incomingAndroidJP = [];
+  	var incomingAndroidKO = [];
+  	var incomingAndroidZH = [];
+  	
+  	var incomingFirebaseJP = [];
+  	var incomingFirebaseKO = [];
+  	var incomingFirebaseZH = [];
+  	
+  	
+  	var qualityAndroidWeekArr = []
+  	var qualityAndroidOK = [];
+  	var qualityFirebaseOK = [];
+  	
+  	var qualityFirebaseWeekArr = []
+  	var qualityAndroidOKMonthly = [];
+  	var qualityFirebaseOKMonthly = [];
+  	
+  	
+  	{% for report in language_report_android %}
+  		
+  		{% if report.language == 'jp' %}
+  			incomingAndroidJP.push({{report.incoming }});
+  		{% endif %}
+  		{% if report.language == 'ko' %}
+			incomingAndroidKO.push({{report.incoming }});
+		{% endif %}
+		
+		{% if report.language == 'zh' %}
+			incomingAndroidZH.push({{report.incoming }});
+		{% endif %}
+  		
+  	{% endfor %}
+  	
+  	
+  	{% for report in language_report_firebase %}
+		
+		{% if report.language == 'jp' %}
+			incomingFirebaseJP.push({{report.incoming }});
+		{% endif %}
+		{% if report.language == 'ko' %}
+			incomingFirebaseKO.push({{report.incoming }});
+		{% endif %}
+	
+		{% if report.language == 'zh' %}
+			incomingFirebaseZH.push({{report.incoming }});
+		{% endif %}
+		
+	{% endfor %}
+  	
+  	console.log('--------------------------------------')
+  	
+  	console.log(incomingFirebaseJP);
+  	console.log(incomingFirebaseKO);
+  	console.log(incomingFirebaseZH);
+  	
+  	console.log('--------------------------------------')
+  	
+  	//console.log(incomingAndroidKO);
+	//console.log(incomingAndroidZH);
+  	  	
+  	
+  	{% for item in total_list %}
+  		weekArr.push( '{{ item.week | date:"d.m.y" }}' );
+  		var total = {{ item.total_assigned | add:item.total_needinfo | add:item.total_inconsult | add:item.total_blocked | add:item.total_review_requested }}
+  		totalBacklog.push(total);
+  		totalSo.push({{ item.total_so}})
+  	{% endfor %}
+  	
+  	{% for item in graph_list %}
+  		{% if item.product_id == 1 %}
+  			androidBacklog.push({{item.get_backlog }});
+  			androidSo.push({{ item.so }})
+  		{% endif %}
+  		{% if item.product_id == 2 %}
+			firebaseBacklog.push({{item.get_backlog }});
+			firebaseSo.push({{ item.so }})
+		{% endif %}
+  	{% endfor %}
+  	
+	var componentArr = [];
+	var compNameArr = [];
+    {% for item in component_report %}
+    	var obj = {};
+    	obj["name"] = '{{ item.1}}';
+    	obj["value"] = '{{ item.0 }}';
+    	
+    	componentArr.push(obj);
+    	//compNameArr.push('{{ item.1}}');
+	{% endfor %}
+  	
+	// partners inflow
+	var componentPartnersArr = [];
+	
+    {% for item in component_report_partner %}
+    	var obj = {};
+    	obj["name"] = '{{ item.1}}';
+    	obj["value"] = '{{ item.0 }}';
+    	
+    	componentPartnersArr.push(obj);
+	{% endfor %}
+	
+	 {% for item in review_list reversed %}
+ 	 	
+        {% if item.product_id == 1 %}
+        	qualityAndroidWeekArr.push('{{ item.week | date:"d.m.y" }}')
+        	qualityAndroidOK.push('{{ item.ok_ratio }}');
+        	qualityAndroidOKMonthly.push('{{ item.monthly_ratio }}');
+        {% endif %}
+        {% if item.product_id == 2 %}
+        	qualityFirebaseWeekArr.push('{{ item.week | date:"d.m.y" }}')
+        	qualityFirebaseOK.push('{{ item.ok_ratio }}');
+    		qualityFirebaseOKMonthly.push('{{ item.monthly_ratio }}');
+        {% endif %}
+   
+   {% endfor %}  
+   
+   	console.log(qualityAndroidOK);
+  	console.log(qualityFirebaseOKMonthly);
+ 	
+  
+  	//console.log(androidBacklog);
+  	//console.log(firebaseBacklog);
+  	
+  	backlogElm = document.getElementById('echart_backlog');
+  	backlog_chart(weekArr,androidBacklog,firebaseBacklog,totalBacklog, backlogElm);
+  	
+  	soElm = document.getElementById('echart_so');
+  	so_chart(weekArr,androidSo,firebaseSo,totalSo, soElm);
+  	
+  	langElm = document.getElementById('echart_android_inflow');
+  	language_chart(langElm, weekArr,incomingAndroidJP, incomingAndroidKO, incomingAndroidZH);
+  	
+  	langElm = document.getElementById('echart_firebase_inflow');
+  	language_chart(langElm, weekArr,incomingFirebaseJP, incomingFirebaseKO, incomingFirebaseZH);
+  	
+  	compElm = document.getElementById('component_firebase_chart');
+  	component_chart(compElm,componentArr,compNameArr);
+  	
+  	compPartnersElm = document.getElementById('component_firebase_chart_partners');
+  	component_chart(compPartnersElm,componentPartnersArr,compNameArr);
+  	
+  	quality_chart('echart_review_request_android', qualityAndroidOK, qualityAndroidOKMonthly,qualityAndroidWeekArr, '1');
+  	quality_chart('echart_review_request_firebase', qualityFirebaseOK, qualityFirebaseOKMonthly,qualityFirebaseWeekArr, '2');
+});
+	</script>
+{% endblock %}
+
+

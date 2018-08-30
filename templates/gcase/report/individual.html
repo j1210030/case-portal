@@ -1,0 +1,201 @@
+{% extends 'gcase/common/base.html' %}
+{% load staticfiles %}
+
+{% block js %}
+<script src="{% static 'js/ajax/individual.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+
+
+<div class="">
+            <div class="page-title">
+              <div class="title_left">
+                <h3><i class="fa fa-cubes"></i> Weekly Individual Records&nbsp;
+                <small><span style="color:#cc0000">{{ period }}</span></small>
+                 </h3>
+                
+              </div>
+            </div>
+            
+            <div class="clearfix"></div>
+
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2><small>Search</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+                    <form class="form-horizontal form-label-left input_mask">
+      			
+                      <div class="col-md-2 col-sm-2 col-xs-12 form-group has-feedback">
+                      			<label>
+                      			From
+                      			</label>
+                          		<select name="from_year" id="from_year" class="form-control">
+                          			<option value="">Year</option>
+                          			{% for year in from_year_options %}
+                          			<option value="{{ year }}" {% if year == from_year %} selected {% endif %}>{{ year }}</option>
+                          			{% endfor %}
+                          		</select>
+                   	</div>
+                   	 <div class="col-md-2 col-sm-2 col-xs-12 form-group has-feedback">
+                   	 			<label>
+                      			
+                      			</label>
+                          		<select name="from_month" id="from_month" class="form-control">
+                          			<option value="">Month</option>
+                          			{% for month in month_options %}
+                          			<option value="{{ month }}" {% if month == from_month %} selected {% endif %} >{{ month }}</option>
+                          			{% endfor %}
+                          		</select>
+                   	</div>
+                   	
+                   	
+                   	<div class="col-md-2 col-sm-2 col-xs-12 form-group has-feedbac">
+                   	</div>
+                  
+                   	<div class="col-md-2 col-sm-2 col-xs-12 form-group has-feedbac">
+                          		<label>To</label>
+                          		<select name="to_year" id="to_year" class="form-control">
+                          			<option value="">Year</option>
+                          			{% for year in to_year_options %}
+                          			<option value="{{ year }}" {% if year == to_year %} selected {% endif %}>{{ year }}</option>
+                          			{% endfor %}
+                          		</select>
+                   	</div>
+                   	 <div class="col-md-2 col-sm-2 col-xs-12 form-group has-feedbac">
+                   	 	<label></label>
+                          		<select name="to_month" id="to_month" class="form-control">
+                          			<option value="">Month</option>
+                          			{% for month in month_options %}
+                          			<option value="{{ month }}" {% if month == to_month %} selected {% endif %}>{{ month }}</option>
+                          			{% endfor %}
+                          		</select>
+                   	</div>
+                   	
+  					<div class="form-group pull-right">
+  						<div class="col-md-12 col-sm-9">
+                         <input type="checkbox" name="csv"  value="1" /> CSV Download &nbsp;&nbsp;
+                          <button type="submit"  class="btn btn-sm btn-rounded btn-primary"> <i class="fa fa-search"></i>&nbsp;Submit</button>
+                        </div>
+                      </div>
+                      
+                    </form>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="clearfix"></div>
+            
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  
+                    <div class="x_content">
+
+                    
+                      <table border="1" class="complexTbl">
+                          <thead>
+                          <tr class="headings">
+                            <th style="text-align:left;border-bottom: 2px solid #0000cc;">Week</th>
+                            <th style="text-align:left;border-bottom: 2px solid #0000cc;">Assignee</th>
+                            <th style="text-align:left;border-bottom: 2px solid #0000cc;">Backlog</th>
+                            <!-- <th style="text-align:left;border-bottom: 2px solid #0000cc;">Pw Backlog</th> -->
+                            <th style="text-align:left;border-bottom: 2px solid #0000cc;">Incoming</th>
+                            <th style="text-align:left;border-bottom: 2px solid #0000cc;">SO</th>
+                            <th style="text-align:left;border-bottom: 2px solid #0000cc;">SO Partner</th>
+                            <!-- <th style="text-align:left;border-bottom: 2px solid #0000cc;">Backlog</th> -->
+                            
+                            
+                          </tr>
+                          </thead>
+                        <tbody>
+
+                        {% for item in total_report %}
+                             
+                             {% for user_wise in item.user_wise %}
+                             <tr>
+                              {% if forloop.first %}
+                                <td rowspan="{{ user_count }}">{{ item.week | date:"d.m.y" }}</td>
+                              {% endif %}
+                                <td>{{ user_wise.user }}</td>
+                                <td>{{ user_wise.report.pw_backlog }}</td>
+                                <td>{{ user_wise.report.incoming }}</td>
+                                <td>{{ user_wise.report.so }}</td>
+                                <td>{{ user_wise.report.so_partner }}</td>
+                                <!-- <td>{{ user_wise.report.pw_backlog }}</td> -->
+                                 
+                             </tr>
+                             {% endfor %}
+
+                        {% endfor %}
+                       </tbody>
+                       
+                      </table>
+
+                    </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="clearfix"></div>
+            
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <!-- <div class="x_panel">
+                  
+                    <div class="x_content">
+                    
+                    	<table border="1" class="complexTbl">
+                          <thead>
+                          <tr class="headings">
+                            <th style="text-align:left;border-bottom: 2px solid #0000cc;width:220px">Component</th>
+                            {% for item in user_list %}
+                             <th style="text-align:left;">{{ item.user.last_name }}</th>
+                            {% endfor %}
+                          </tr>
+                         </thead>
+                         <tbody>
+                         	
+                         	 {% for component in component_list %}
+                         	 <tr>
+                         		
+                         		<td>{{ component }}</td>
+                         	
+                         	
+                         		{% for data in users_component_list %}
+                         			{% if component.id == data.component_report %}
+                         				{% for case_count in data.component_report %}
+                         					<td> {{ case_count }}</td>
+                         				{% endfor %}
+                         			{% endif %}
+                         		{% endfor %}
+                         		
+                         	 </tr>
+                         	 {% endfor %}
+                         	
+                         </tbody>
+                         
+                        </table>
+                    
+                    </div>
+                  </div> -->
+               </div>
+           </div>
+           
+           </div>
+<div class="modal fade bs-example-modal-lg" id="individual-week-dialog" tabindex="-1" role="dialog" aria-hidden="true">
+                    
+</div>
+
+{% endblock %}

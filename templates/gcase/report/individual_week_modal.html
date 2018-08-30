@@ -1,0 +1,115 @@
+<div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+
+                        <div class="modal-header">
+                          <h4 class="modal-title" id="myModalLabel2">Week:<i> {{ week | date:"d.m.Y" }} </i></h4>
+                        </div>
+                        <div class="modal-body">
+                        
+                        
+                        <div class="x_content">
+
+
+                    <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                      <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                        <li role="presentation" class="active">
+                        	<a href="#tab_android" id="android-tab" role="tab" data-toggle="tab" aria-expanded="true">
+                        		<img src="{{ MEDIA_URL }}products/2017/08/android.png" class="img-rounded" alt="Logo" width="20" height="20">&nbsp;Android
+                        	</a>
+                        </li>
+                        <li role="presentation" class="">
+                        <a href="#tab_firebase" role="tab" id="firebase-tab" data-toggle="tab" aria-expanded="false">
+                        	 <img src="{{ MEDIA_URL }}products/2017/08/firebase.png" class="img-rounded" alt="Logo" width="20" height="20">&nbsp;Firebase
+                        </a>
+                        
+                        </li>
+                     
+                      </ul>
+                      <div id="myTabContent" class="tab-content">
+                        <div role="tabpanel" class="tab-pane fade active in" id="tab_android" aria-labelledby="home-tab">
+                        	
+                        	
+                       <table border="1" class="complexTbl">
+                          <thead>
+                          <tr class="headings">
+                            
+                            <th style="text-align:left;border-bottom: 2px solid #9ACD32;">Assignee</th>
+                            <th style="text-align:left;border-bottom: 2px solid #9ACD32;">Pw Backlog</th>
+                            <th style="text-align:left;border-bottom: 2px solid #9ACD32;">Incoming</th>
+                            <th style="text-align:left;border-bottom: 2px solid #9ACD32;">Incoming (Partner)</th>
+                            <th style="text-align:left;border-bottom: 2px solid #9ACD32;">So (Total)</th>
+                            <th style="text-align:left;border-bottom: 2px solid #9ACD32;">So (Partner)</th>
+                            <th style="text-align:left;border-bottom: 2px solid #9ACD32;">Backlog</th>
+                            
+                          </tr>
+                          </thead>
+                        <tbody>
+                        	{% for item in individual_report %}
+                        	{% if item.product.id == 1 %}
+                        	<tr>
+                        		<td>{{ item.gcase_user.user.first_name }} {{ item.gcase_user.user.last_name }}</td>
+                        		<td>{{ item.pw_backlog }}</td>
+                        		<td>{{ item.incoming }}</td>
+                        		<td>{{ item.incoming_partner }}</td>
+                        		<td>{{ item.so }}</td>
+                        		<td>{{ item.so_partner }}</td>
+                        		<td>{{ item.get_backlog }}</td>
+                        	</tr>
+                        	{% endif %}
+                        	{% endfor %}
+                        </tbody>
+                        
+                        </table>
+                         
+                        </div>
+                        
+                        <div role="tabpanel" class="tab-pane fade" id="tab_firebase" aria-labelledby="profile-tab">
+                       	 <table border="1" class="complexTbl">
+                          <thead>
+                          <tr class="headings">
+                            
+                            <th style="text-align:left;border-bottom: 2px solid #ffc04c;">Assignee</th>
+                            <th style="text-align:left;border-bottom: 2px solid #ffc04c;">Pw Backlog</th>
+                            <th style="text-align:left;border-bottom: 2px solid #ffc04c;">Incoming</th>
+                            <th style="text-align:left;border-bottom: 2px solid #ffc04c;">Incoming (Partner)</th>
+                            <th style="text-align:left;border-bottom: 2px solid #ffc04c;">So (Total)</th>
+                            <th style="text-align:left;border-bottom: 2px solid #ffc04c;">So (Partner)</th>
+                            <th style="text-align:left;border-bottom: 2px solid #ffc04c;">Backlog</th>
+                            
+                          </tr>
+                          </thead>
+                        <tbody>
+                        
+                        
+                        
+                        	{% for item in individual_report %}
+                        	{% if item.product.id == 2 %}
+                        	<tr>
+                        		<td>{{ item.gcase_user.user.first_name }} {{ item.gcase_user.user.last_name }}</td>
+                        		<td>{{ item.pw_backlog }}</td>
+                        		<td>{{ item.incoming }}</td>
+                        		<td>{{ item.incoming_partner }}</td>
+                        		<td>{{ item.so }}</td>
+                        		<td>{{ item.so_partner }}</td>
+                        		<td>{{ item.get_backlog }}</td>
+                        	</tr>
+                        	{% endif %}
+                        	{% endfor %}
+                        	</tbody>
+                        </table>
+                        
+                        </div>
+                        
+                      </div>
+                    </div>
+                      
+                      </div>
+                   
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">Close</button>
+                         
+                        </div>
+
+                      </div>
+                    </div>
